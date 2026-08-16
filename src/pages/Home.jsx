@@ -113,9 +113,9 @@ export default function Home() {
                   <FaCalendarAlt />
                 </div>
                 <div className="stat-number">
-                  <Counter end={9} suffix=" Tahun" />
+                  <Counter end={6} suffix=" Tahun" />
                 </div>
-                <div className="stat-label">Pengabdian Sejak 2017</div>
+                <div className="stat-label">Bergerak Sejak 2020</div>
               </div>
             </ScrollReveal>
           </div>
@@ -167,12 +167,10 @@ export default function Home() {
                   Menyalakan Harapan Melalui <span className="gradient-text-green">Pendidikan</span>
                 </h2>
                 <p className="about-preview-desc">
-                  Komunitas Belajar Sedekah lahir dari inisiatif kepedulian mahasiswa untuk membuka akses
-                  pendidikan tinggi bagi yang membutuhkan serta memperluas jendela literasi ke pelosok daerah.
+                  Komunitas Belajar Sedekah (@belajarsedekah.id) didirikan oleh <strong>Despa Putri Lestari</strong> pada tahun 2020 sebagai gerakan sosial kemanusiaan untuk membuka akses pendidikan dan memperluas jendela literasi bagi anak-anak Indonesia.
                 </p>
                 <p className="about-preview-desc">
-                  Setiap donasi disalurkan 100% tepat sasaran dan diaudit dengan standar transparansi terbuka
-                  yang dapat diakses kapan saja oleh publik dan para donatur.
+                  Setiap rupiah donasi disalurkan 100% tepat sasaran dan dilaporkan secara transparan dan terbuka kepada publik dan seluruh donatur dermawan.
                 </p>
                 <div className="about-values">
                   <div className="value-tag"><span className="val-icon">🎓</span> Pendidikan Merata</div>

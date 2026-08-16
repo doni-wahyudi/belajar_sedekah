@@ -25,8 +25,8 @@ export default function About() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Mengenal lebih dekat visi kemanusiaan, dedikasi relawan, dan rekam jejak pengabdian
-              kami dalam pemerataan pendidikan sejak tahun 2017.
+              Mengenal lebih dekat visi kemanusiaan, ketulusan relawan, dan rekam jejak dedikasi
+              kami yang diinisiasi oleh <strong>Despa Putri Lestari</strong> sejak tahun 2020.
             </p>
           </ScrollReveal>
         </div>
@@ -114,7 +114,7 @@ export default function About() {
             <h2 className="section-title">Jejak Langkah <span className="gradient-text-blue">Pengabdian</span></h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Perjalanan 9 tahun merajut asa bersama donatur, relawan, dan para penerima manfaat</p>
+            <p className="section-subtitle">Perjalanan dedikasi sejak tahun 2020 merajut asa bersama donatur, relawan, dan para penerima manfaat</p>
           </ScrollReveal>
 
           <div className="timeline">

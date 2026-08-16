@@ -1,88 +1,83 @@
 export const teamMembers = [
   {
-    name: 'Komunitas Belajar Sedekah',
-    role: 'Founder & Ketua',
-    description: 'Pendiri komunitas yang berkomitmen untuk mewujudkan pendidikan yang merata bagi semua.',
+    name: 'Despa Putri Lestari',
+    role: 'Founder & Pembina',
+    description: 'Inisiator dan pendiri Komunitas Belajar Sedekah sejak tahun 2020 dengan visi mewujudkan gerakan kepedulian sosial dan pendidikan yang inklusif, berkelanjutan, dan transparan.',
   },
   {
-    name: 'Tim Beasiswa Pandawa',
-    role: 'Divisi Beasiswa',
-    description: 'Mengelola seleksi, penyaluran, dan pendampingan penerima Beasiswa Pandawa.',
+    name: 'Tim Program & Beasiswa',
+    role: 'Divisi Pendidikan',
+    description: 'Mengelola seleksi penerima manfaat, monitoring akademik, serta penyaluran bantuan pendidikan dan beasiswa adik asuh.',
   },
   {
-    name: 'Tim Drop Books',
+    name: 'Tim Drop Books & Literasi',
     role: 'Divisi Literasi',
-    description: 'Mengkoordinasikan pengumpulan, sortir, dan distribusi buku ke daerah terpencil.',
+    description: 'Mengkoordinasikan pengumpulan, kurasi buku, dan ekspedisi distribusi bahan bacaan ke taman baca pelosok nusantara.',
   },
   {
-    name: 'Tim Humas & Media',
-    role: 'Divisi Komunikasi',
-    description: 'Mengelola media sosial, website, dan publikasi kegiatan komunitas.',
+    name: 'Tim Humas, Media & Relawan',
+    role: 'Divisi Komunikasi & Komunitas',
+    description: 'Mengelola kanal resmi Instagram @belajarsedekah.id, dokumentasi kegiatan, transparansi donasi, dan koordinasi relawan.',
   },
 ];
 
 export const milestones = [
   {
-    year: 2017,
-    title: 'Berdirinya Komunitas',
-    description: 'Komunitas Belajar Sedekah didirikan oleh sekelompok mahasiswa UIN Sunan Kalijaga Yogyakarta yang memiliki kepedulian terhadap pendidikan.',
-  },
-  {
-    year: 2017,
-    title: 'Beasiswa Pandawa Batch 1',
-    description: 'Penyaluran Beasiswa Pandawa pertama kali kepada 2 mahasiswa Teknik Informatika.',
-  },
-  {
-    year: 2018,
-    title: 'Program Drop Books Dimulai',
-    description: 'Meluncurkan program Drop Books untuk menyalurkan buku ke daerah yang membutuhkan.',
-  },
-  {
-    year: 2019,
-    title: 'Website Resmi Diluncurkan',
-    description: 'Meluncurkan website resmi belajarsedekah.com sebagai pusat informasi komunitas.',
-  },
-  {
     year: 2020,
-    title: 'Adaptasi Masa Pandemi',
-    description: 'Mengadaptasi program di tengah pandemi COVID-19, termasuk donasi online dan distribusi buku secara aman.',
+    title: 'Didirikan oleh Despa Putri Lestari',
+    description: 'Komunitas Belajar Sedekah diinisiasi oleh Despa Putri Lestari di tengah masa pandemi tahun 2020 sebagai wadah kepedulian nyata untuk membantu anak-anak dan mahasiswa yang kesulitan biaya pendidikan.',
+  },
+  {
+    year: 2021,
+    title: 'Inisiasi Bantuan Pendidikan & Santunan',
+    description: 'Menyalurkan bantuan biaya sekolah, perlengkapan belajar, dan sembako bagi keluarga prasejahtera yang terdampak krisis ekonomi.',
   },
   {
     year: 2022,
-    title: '5 Tahun Belajar Sedekah',
-    description: 'Merayakan 5 tahun perjalanan dengan total lebih dari 15 penerima beasiswa dan 3000+ buku terdistribusi.',
+    title: 'Peluncuran Program Drop Books',
+    description: 'Memulai penggalangan donasi buku nasional dan mendistribusikan ribuan buku bacaan berkualitas ke berbagai pojok baca dan sekolah terpencil.',
+  },
+  {
+    year: 2023,
+    title: 'Pengembangan Jaringan Relawan Pemuda',
+    description: 'Merekrut dan memberdayakan puluhan relawan muda untuk kegiatan sosial terjun langsung ke lapangan, pendampingan belajar, dan aksi berbagi berkah.',
   },
   {
     year: 2024,
-    title: 'Ekspansi Drop Books',
-    description: 'Memperluas jangkauan Drop Books ke 5 provinsi di Indonesia.',
+    title: 'Peningkatan Transparansi Laporan',
+    description: 'Menerapkan standarisasi pencatatan donasi 100% transparan yang dilaporkan secara terbuka kepada seluruh donatur melalui kanal publik.',
+  },
+  {
+    year: 2025,
+    title: 'Aksi Berkelanjutan & Ekosistem Sedekah',
+    description: 'Memperluas jangkauan penerima manfaat beasiswa pendidikan dan penyaluran buku di lebih dari 5 provinsi di Indonesia.',
   },
   {
     year: 2026,
-    title: 'Beasiswa Pandawa Batch 9',
-    description: 'Membuka pendaftaran Beasiswa Pandawa Batch 9 dengan 16 pendaftar.',
+    title: 'Transformasi Digital Portal Belajar Sedekah',
+    description: 'Meluncurkan portal website resmi untuk memudahkan donatur, transparansi laporan real-time, dan pendaftaran relawan se-Indonesia.',
   },
 ];
 
 export const values = [
   {
-    title: 'Transparansi',
-    description: 'Kami berkomitmen untuk selalu transparan dalam pengelolaan dana donasi dan pelaporan keuangan.',
+    title: 'Amanah & Transparan',
+    description: 'Setiap rupiah donasi dicatat, disalurkan sesuai akad, dan dilaporkan secara terbuka untuk menjaga kepercayaan para dermawan.',
     icon: 'transparency',
   },
   {
-    title: 'Pendidikan',
-    description: 'Pendidikan adalah fokus utama kami. Setiap program dirancang untuk meningkatkan akses dan kualitas pendidikan.',
+    title: 'Pendidikan & Literasi',
+    description: 'Fokus utama kami adalah membuka akses pendidikan dan buku bacaan berkualitas bagi generasi penerus bangsa.',
     icon: 'education',
   },
   {
-    title: 'Kebersamaan',
-    description: 'Dengan berbagi, kita peduli. Kami percaya bahwa kebersamaan dapat membawa perubahan yang berarti.',
+    title: 'Kebersamaan (Share, We Care)',
+    description: 'Dengan berbagi, kita peduli. Bersama Despa Putri Lestari dan seluruh relawan, kami yakin langkah kecil bersama menghasilkan dampak besar.',
     icon: 'community',
   },
   {
     title: 'Keberlanjutan',
-    description: 'Program kami dirancang untuk memberikan dampak jangka panjang dan berkelanjutan bagi penerima manfaat.',
+    description: 'Bantuan tidak hanya bersifat konsumtif sesaat, melainkan memberdayakan penerima manfaat agar mandiri dan berprestasi.',
     icon: 'sustainability',
   },
 ];
