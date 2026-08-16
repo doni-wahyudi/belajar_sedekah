@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHandHoldingHeart, FaUniversity, FaQrcode, FaCalculator, FaArrowRight, FaHeart, FaBook, FaGraduationCap, FaWhatsapp, FaEnvelope, FaCheckCircle, FaShieldAlt } from 'react-icons/fa';
+import { FaHandHoldingHeart, FaUniversity, FaQrcode, FaCalculator, FaArrowRight, FaHeart, FaWhatsapp, FaCheckCircle, FaShieldAlt, FaUsers, FaTiktok, FaInstagram } from 'react-icons/fa';
 import { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import './Donation.css';
@@ -7,37 +7,24 @@ import './Donation.css';
 const bankAccounts = [
   {
     bank: 'Bank Syariah Indonesia (BSI)',
-    code: 'BSI',
-    accountNumber: '7182 7391 23',
-    accountName: 'Komunitas Belajar Sedekah',
-    color: 'linear-gradient(135deg, #00897b, #26a69a)',
-  },
-  {
-    bank: 'Bank Mandiri',
-    code: 'MANDIRI',
-    accountNumber: '1370 0123 4567 890',
-    accountName: 'Komunitas Belajar Sedekah',
-    color: 'linear-gradient(135deg, #0f2444, #0284c7)',
-  },
-  {
-    bank: 'Bank Central Asia (BCA)',
-    code: 'BCA',
-    accountNumber: '8120 4567 89',
-    accountName: 'Komunitas Belajar Sedekah',
-    color: 'linear-gradient(135deg, #004b8d, #1e88e5)',
+    code: 'BSI (Rekening Resmi)',
+    accountNumber: '7234 8563 18',
+    accountName: 'Despa Putri Lestari',
+    color: 'linear-gradient(135deg, #00897b, #73a932)',
+    isPrimary: true,
   },
 ];
 
 const impactCalculations = [
-  { amount: 50000, description: 'Menyediakan 5 buku cerita edukatif untuk taman baca desa', icon: <FaBook /> },
-  { amount: 100000, description: 'Mengirimkan paket buku Drop Books ke 1 sekolah terpencil', icon: <FaBook /> },
-  { amount: 250000, description: 'Membantu tunjangan buku & uang saku mingguan 1 mahasiswa', icon: <FaGraduationCap /> },
-  { amount: 500000, description: 'Bantuan biaya hidup & pendampingan 1 bulan penerima beasiswa', icon: <FaGraduationCap /> },
-  { amount: 1500000, description: 'Mendanai 1 semester penuh beasiswa mahasiswa prasejahtera', icon: <FaHeart /> },
+  { amount: 25000, description: 'Menyediakan 1 paket makanan bergizi & air mineral Jum’at Berkah (Jumber)', icon: <FaHeart /> },
+  { amount: 50000, description: 'Membantu 2 paket makanan bergizi & santunan langsung pejuang nafkah jalanan', icon: <FaHeart /> },
+  { amount: 150000, description: 'Mendanai 1 Paket Bingkisan Lebaran / Sembako lengkap keluarga prasejahtera', icon: <FaHandHoldingHeart /> },
+  { amount: 350000, description: 'Santunan biaya hidup, nutrisi balita, dan kebutuhan lansia dhuafa binaan', icon: <FaHandHoldingHeart /> },
+  { amount: 1000000, description: 'Patungan tebar hewan Qurban Berkah ke pelosok desa minim pequrban', icon: <FaHeart /> },
 ];
 
 export default function Donation() {
-  const [donationAmount, setDonationAmount] = useState(100000);
+  const [donationAmount, setDonationAmount] = useState(150000);
   const [copied, setCopied] = useState(null);
 
   const getImpact = (amount) => {
@@ -52,8 +39,8 @@ export default function Donation() {
   };
 
   const generateWhatsAppUrl = () => {
-    const text = `Halo Komunitas Belajar Sedekah,%0A%0ASaya ingin konfirmasi donasi:%0A- Nominal: Rp ${new Intl.NumberFormat('id-ID').format(donationAmount)}%0A- Program: Beasiswa Pandawa / Drop Books%0A%0AMohon konfirmasi dan terima kasih.`;
-    return `https://wa.me/6281234567890?text=${text}`;
+    const text = `Assalamu'alaikum Admin Belajar Sedekah,%0A%0ASaya ingin konfirmasi donasi:%0A- Nominal: Rp ${new Intl.NumberFormat('id-ID').format(donationAmount)}%0A- Program: Jum'at Berkah (Jumber) / Bingkisan Lebaran / Sedekah Umum%0A%0AMohon konfirmasi dan terima kasih.`;
+    return `https://wa.me/6282269665134?text=${text}`;
   };
 
   return (
@@ -64,13 +51,12 @@ export default function Donation() {
         <div className="container page-hero-content">
           <ScrollReveal>
             <h1 className="page-hero-title">
-              Salurkan <span className="gradient-text-green">Kebaikan</span>, Wujudkan <span className="gradient-text-blue">Harapan</span>
+              Mari <span className="gradient-text-green">Bumikan Sedekah</span> Bersama <span className="gradient-text-blue">Sobat BS</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Setiap rupiah yang Anda titipkan adalah jembatan mimpi bagi anak-anak dan mahasiswa
-              Indonesia untuk meraih pendidikan yang layak dan bermartabat.
+              "Mari bumikan sedekah, berapapun, dimanapun dan kapanpun." Temanmu belajar, berbagi, dan bertumbuh setiap hari 🪴
             </p>
           </ScrollReveal>
         </div>
@@ -83,7 +69,7 @@ export default function Donation() {
             <h2 className="section-title">Kalkulator <span className="gradient-text-green">Dampak Kebaikan</span></h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Simulasikan seberapa besar dampak nyata yang dihasilkan dari donasi Anda</p>
+            <p className="section-subtitle">Simulasikan seberapa besar manfaat nyata yang dihasilkan dari sedekah Anda</p>
           </ScrollReveal>
 
           <ScrollReveal>
@@ -99,32 +85,35 @@ export default function Donation() {
                     <span className="calc-currency">Rp</span>
                     <input
                       type="number"
-                      value={donationAmount}
-                      onChange={(e) => setDonationAmount(Math.max(0, Number(e.target.value)))}
                       min="10000"
                       step="10000"
+                      value={donationAmount}
+                      onChange={(e) => setDonationAmount(Math.max(0, parseInt(e.target.value) || 0))}
                       className="calc-input"
                     />
                   </div>
                 </div>
-                
-                <div className="calc-presets">
-                  {[50000, 100000, 250000, 500000, 1500000].map(amount => (
+
+                <div className="quick-amounts">
+                  {[25000, 50000, 150000, 350000, 1000000].map((amt) => (
                     <button
-                      key={amount}
-                      className={`preset-btn ${donationAmount === amount ? 'preset-active' : ''}`}
-                      onClick={() => setDonationAmount(amount)}
+                      key={amt}
+                      type="button"
+                      className={`quick-btn ${donationAmount === amt ? 'quick-btn-active' : ''}`}
+                      onClick={() => setDonationAmount(amt)}
                     >
-                      Rp {new Intl.NumberFormat('id-ID').format(amount)}
+                      Rp {new Intl.NumberFormat('id-ID').format(amt)}
                     </button>
                   ))}
                 </div>
 
-                <div className="calc-result">
-                  <div className="calc-result-icon">{getImpact(donationAmount).icon}</div>
-                  <div className="calc-result-text">
-                    <span>Dampak yang Anda ciptakan:</span>
-                    <strong>{getImpact(donationAmount).description}</strong>
+                <div className="calc-impact-box">
+                  <div className="impact-icon-wrapper">
+                    {getImpact(donationAmount).icon}
+                  </div>
+                  <div>
+                    <h4>Estimasi Dampak Kebaikan:</h4>
+                    <p>{getImpact(donationAmount).description}</p>
                   </div>
                 </div>
               </div>
@@ -133,120 +122,119 @@ export default function Donation() {
         </div>
       </section>
 
-      {/* Bank Accounts */}
+      {/* Bank Transfer */}
       <section className="bank-section section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <ScrollReveal>
-            <h2 className="section-title">Rekening Resmi <span className="gradient-text-blue">Donasi</span></h2>
+            <h2 className="section-title">Rekening <span className="gradient-text-blue">Resmi Donasi</span></h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Silakan transfer donasi ke salah satu rekening resmi atas nama lembaga kami</p>
+            <p className="section-subtitle">Salurkan infaq & sedekah terbaik Anda langsung ke rekening resmi yang amanah</p>
           </ScrollReveal>
 
-          <div className="bank-grid">
+          <div className="bank-grid" style={{ maxWidth: '640px', margin: '0 auto' }}>
             {bankAccounts.map((account, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
-                <div className="bank-card glass-card">
-                  <div className="bank-header">
-                    <div className="bank-logo" style={{ background: account.color }}>
-                      <FaUniversity />
-                    </div>
-                    <div>
-                      <h3 className="bank-name">{account.bank}</h3>
-                      <span className="bank-code-badge">{account.code}</span>
-                    </div>
+                <div className="bank-card" style={{ background: account.color }}>
+                  <div className="bank-card-header">
+                    <span className="bank-code">{account.code}</span>
+                    <FaUniversity className="bank-icon" />
                   </div>
-                  
-                  <div className="bank-info">
-                    <div className="bank-account-number">
-                      <span className="bank-label">Nomor Rekening</span>
-                      <div className="bank-number-row">
-                        <span className="bank-number">{account.accountNumber}</span>
-                        <button
-                          className={`copy-btn ${copied === index ? 'copied-active' : ''}`}
-                          onClick={() => copyToClipboard(account.accountNumber, index)}
-                          title="Salin Nomor Rekening"
-                        >
-                          {copied === index ? <><FaCheckCircle /> Tersalin</> : 'Salin'}
-                        </button>
-                      </div>
+                  <div className="bank-card-number">
+                    {account.accountNumber}
+                  </div>
+                  <div className="bank-card-footer">
+                    <div>
+                      <span className="bank-holder-label">Atas Nama</span>
+                      <span className="bank-holder-name">{account.accountName}</span>
                     </div>
-                    
-                    <div className="bank-account-name">
-                      <span className="bank-label">Atas Nama Rekening</span>
-                      <span className="bank-owner">{account.accountName}</span>
-                    </div>
+                    <button
+                      className={`copy-btn ${copied === index ? 'copy-btn-success' : ''}`}
+                      onClick={() => copyToClipboard(account.accountNumber, index)}
+                    >
+                      {copied === index ? (
+                        <>
+                          <FaCheckCircle /> Tersalin!
+                        </>
+                      ) : (
+                        'Salin Rekening'
+                      )}
+                    </button>
                   </div>
                 </div>
               </ScrollReveal>
             ))}
           </div>
+
+          <div style={{ textAlign: 'center', marginTop: 'var(--space-6)' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+              🔒 Rekening resmi terverifikasi atas nama Founder Komunitas Belajar Sedekah: <strong>Despa Putri Lestari</strong>
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* QR Code Section */}
-      <section className="qr-section section">
-        <div className="container">
-          <ScrollReveal>
-            <div className="qr-card glass-card">
-              <div className="qr-content">
-                <div className="qr-icon-wrap">
-                  <FaQrcode className="qr-icon" />
-                </div>
-                <h3>Donasi Praktis via QRIS</h3>
-                <p>
-                  Mendukung seluruh aplikasi mobile banking (BSI, Mandiri, BCA, BRI, BNI) dan e-wallet (GoPay, OVO, Dana, ShopeePay, LinkAja)
-                </p>
-                <div className="qr-placeholder">
-                  <div className="qr-box">
-                    <div className="qr-mockup-pattern">
-                      <FaQrcode size={110} style={{ color: 'var(--color-navy)' }} />
-                    </div>
-                    <div className="qris-badge-tag">QRIS NASIONAL</div>
-                    <p className="qr-institution">NMID: ID102003892019</p>
-                    <p className="qr-institution-bold">KOMUNITAS BELAJAR SEDEKAH</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Confirmation */}
-      <section className="confirm-section section" style={{ background: 'var(--bg-secondary)' }}>
+      {/* WhatsApp Confirmation & Community Group */}
+      <section className="confirmation-section section">
         <div className="container">
           <ScrollReveal>
             <div className="confirm-card glass-card">
-              <div className="confirm-icon-wrap">
-                <FaHandHoldingHeart className="confirm-icon" />
+              <div className="confirm-icon-wrapper">
+                <FaWhatsapp size={48} />
               </div>
-              <h3>Konfirmasi Donasi Anda</h3>
+              <h2>Konfirmasi Donasi & Komunitas Sobat BS</h2>
               <p>
-                Setelah melakukan transfer, silakan klik tombol di bawah untuk konfirmasi otomatis melalui WhatsApp atau Email
-                agar donasi Anda segera dicatat dalam buku laporan transparansi kami.
+                Setelah melakukan transfer, mohon kirimkan bukti transfer kepada Admin agar donasi Anda tercatat rapi dalam Laporan Pertanggungjawaban (LPJ).
               </p>
-              <div className="confirm-actions">
+              
+              <div className="confirm-action-buttons">
                 <a
                   href={generateWhatsAppUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-lg"
                 >
-                  <FaWhatsapp size={20} /> Konfirmasi via WhatsApp
+                  <FaWhatsapp /> Konfirmasi via WhatsApp Admin (0822-6966-5134)
                 </a>
                 <a
-                  href="mailto:humas@belajarsedekah.com?subject=Konfirmasi%20Donasi%20Belajar%20Sedekah"
+                  href="https://chat.whatsapp.com/BIxQoqQQwyt1UwaApddVT7"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-outline-blue btn-lg"
                 >
-                  <FaEnvelope /> Konfirmasi via Email
+                  <FaUsers /> Gabung Grup WhatsApp Sobat BS
                 </a>
               </div>
-              <div className="confirm-footer-links">
-                <Link to="/transparansi" className="confirm-transparency">
-                  <FaShieldAlt /> Lihat Buku Laporan Transparansi Donasi <FaArrowRight />
-                </Link>
+
+              <div className="social-connect-row" style={{ marginTop: 'var(--space-8)', display: 'flex', justifyContent: 'center', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
+                <a href="https://www.instagram.com/belajarsedekah.id/" target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <FaInstagram /> @belajarsedekah.id
+                </a>
+                <a href="https://vt.tiktok.com/ZS2JAStEo/" target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <FaTiktok /> TikTok @belajarsedekah.id
+                </a>
               </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Transparency Guarantee */}
+      <section className="guarantee-section section" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <ScrollReveal>
+            <div className="guarantee-box">
+              <FaShieldAlt className="guarantee-icon" />
+              <div>
+                <h3>Komitmen Amanah & Transparansi 100%</h3>
+                <p>
+                  Setiap dana yang masuk dicatat dan dilaporkan secara berkala dalam dokumen LPJ resmi.
+                  Anda dapat memantau penggunaan dana secara terbuka melalui menu Transparansi.
+                </p>
+              </div>
+              <Link to="/transparansi" className="btn btn-outline">
+                Buka Laporan Keuangan <FaArrowRight />
+              </Link>
             </div>
           </ScrollReveal>
         </div>

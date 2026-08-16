@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { FaGraduationCap, FaBook, FaCheckCircle, FaArrowRight, FaUsers, FaMapMarkerAlt, FaWhatsapp, FaHandHoldingHeart } from 'react-icons/fa';
+import { FaHeart, FaGift, FaGlobe, FaUsers, FaCheckCircle, FaArrowRight, FaMapMarkerAlt, FaWhatsapp, FaHandHoldingHeart } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import { programs, recipients } from '../data/programs';
 import './Programs.css';
@@ -17,9 +17,6 @@ export default function Programs() {
     }
   }, [location]);
 
-  const pandawa = programs[0];
-  const dropBooks = programs[1];
-
   return (
     <div className="programs-page">
       {/* Hero */}
@@ -28,31 +25,31 @@ export default function Programs() {
         <div className="container page-hero-content">
           <ScrollReveal>
             <h1 className="page-hero-title">
-              Program <span className="gradient-text-green">Pendidikan</span> & <span className="gradient-text-blue">Sosial</span>
+              Program <span className="gradient-text-green">Kebaikan</span> & Aksi <span className="gradient-text-blue">Sosial</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Pendidikan adalah investasi terbaik peradaban. Kami menjalankan program beasiswa berkelanjutan
-              dan penyaluran buku untuk membuka akses belajar yang merata.
+              "Mari bumikan sedekah, berapapun, dimanapun dan kapanpun." Kami menggerakkan aksi rutin Jum'at Berkah,
+              bingkisan Ramadhan, tebar qurban, dan pemberdayaan komunitas Sobat BS di Lampung.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Beasiswa Pandawa */}
-      <section className="program-detail section" id="beasiswa-pandawa">
+      {/* Program 1: Jum'at Berkah */}
+      <section className="program-detail section" id="jumat-berkah">
         <div className="container">
           <div className="program-detail-grid">
             <ScrollReveal direction="right">
               <div className="program-detail-content">
                 <div className="program-detail-icon icon-green">
-                  <FaGraduationCap size={38} />
+                  <FaHeart size={38} />
                 </div>
-                <h2 className="program-detail-title">{pandawa.title}</h2>
-                <p className="program-detail-subtitle">{pandawa.subtitle}</p>
+                <h2 className="program-detail-title">{programs[0].title}</h2>
+                <p className="program-detail-subtitle">{programs[0].subtitle}</p>
                 <div className="program-detail-text">
-                  {pandawa.fullDescription.split('\n\n').map((p, i) => (
+                  {programs[0].fullDescription.split('\n\n').map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
@@ -61,21 +58,21 @@ export default function Programs() {
                   <div className="program-stat">
                     <FaUsers className="program-stat-icon icon-color-green" />
                     <div>
-                      <strong>{pandawa.stats.totalRecipients}+</strong>
-                      <span>Penerima Manfaat</span>
+                      <strong>{programs[0].stats.totalRecipients}+</strong>
+                      <span>Paket Makanan Dibagikan</span>
                     </div>
                   </div>
                   <div className="program-stat">
-                    <FaGraduationCap className="program-stat-icon icon-color-green" />
+                    <FaHandHoldingHeart className="program-stat-icon icon-color-green" />
                     <div>
-                      <strong>{pandawa.stats.totalFunding}</strong>
+                      <strong>{programs[0].stats.totalFunding}</strong>
                       <span>Dana Tersalurkan</span>
                     </div>
                   </div>
                   <div className="program-stat">
                     <FaMapMarkerAlt className="program-stat-icon icon-color-green" />
                     <div>
-                      <strong>{pandawa.stats.yearsRunning} Tahun</strong>
+                      <strong>{programs[0].stats.yearsRunning} Tahun</strong>
                       <span>Konsisten Berjalan</span>
                     </div>
                   </div>
@@ -83,40 +80,38 @@ export default function Programs() {
 
                 <div className="program-cta-group">
                   <Link to="/donasi" className="btn btn-primary">
-                    <FaHandHoldingHeart /> Dukung Penerima Beasiswa
+                    <FaHandHoldingHeart /> Sedekah Jum'at Sekarang
                   </Link>
-                  <Link to="/berita/pendaftaran-beasiswa-pandawa-2026" className="btn btn-outline">
-                    Info Pendaftaran 2026 <FaArrowRight />
-                  </Link>
+                  <a href="https://chat.whatsapp.com/BIxQoqQQwyt1UwaApddVT7" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                    <FaUsers /> Ikut Jadi Relawan Jumber
+                  </a>
                 </div>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="left">
               <div className="program-sidebar">
-                {/* Eligibility */}
                 <div className="sidebar-card glass-card">
-                  <h3 className="sidebar-heading-green">Syarat Pendaftaran</h3>
+                  <h3 className="sidebar-heading-green">Sasaran Penerima Manfaat</h3>
                   <ul className="eligibility-list">
-                    {pandawa.eligibility.map((item, i) => (
+                    {programs[0].eligibility.map((item, i) => (
                       <li key={i}>
-                        <FaCheckCircle className="check-icon" />
+                        <FaCheckCircle className="check-icon icon-color-green" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Timeline */}
                 <div className="sidebar-card glass-card">
-                  <h3 className="sidebar-heading-green">Tahapan Seleksi Tahunan</h3>
+                  <h3 className="sidebar-heading-green">Timeline Aksi Mingguan</h3>
                   <div className="timeline-mini">
-                    {pandawa.timeline.map((item, i) => (
-                      <div key={i} className="timeline-item">
-                        <div className="timeline-dot" />
-                        <div className="timeline-content">
-                          <strong>{item.month}</strong>
-                          <span>{item.activity}</span>
+                    {programs[0].timeline.map((t, i) => (
+                      <div key={i} className="timeline-mini-item">
+                        <div className="timeline-mini-dot dot-green" />
+                        <div>
+                          <strong>{t.month}</strong>
+                          <p>{t.activity}</p>
                         </div>
                       </div>
                     ))}
@@ -128,115 +123,128 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Recipients */}
-      <section className="recipients section" style={{ background: 'var(--bg-secondary)' }}>
+      {/* Program 2: Paket Bingkisan Lebaran */}
+      <section className="program-detail section section-alt" id="bingkisan-lebaran" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
-          <ScrollReveal>
-            <h2 className="section-title">Penerima Beasiswa <span className="gradient-text-green">Pandawa</span></h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Kisah inspiratif para mahasiswa dan alumni yang telah didukung melalui amanah donasi Anda</p>
-          </ScrollReveal>
-
-          <div className="recipients-grid">
-            {recipients.map((person, index) => (
-              <ScrollReveal key={index} delay={index * 0.05}>
-                <div className="recipient-card glass-card">
-                  <div className="recipient-avatar">
-                    {person.name.charAt(0)}
-                  </div>
-                  <h4 className="recipient-name">{person.name}</h4>
-                  <p className="recipient-program">{person.program}</p>
-                  <span className={`recipient-status ${person.status === 'Alumni' ? 'status-alumni' : 'status-active'}`}>
-                    {person.status === 'Alumni' ? '🎓 Alumni' : '✨ Mahasiswa Aktif'}
-                  </span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Drop Books */}
-      <section className="program-detail section" id="drop-books">
-        <div className="container">
-          <div className="program-detail-grid reverse">
-            <ScrollReveal direction="right">
-              <div className="program-sidebar">
-                {/* How It Works */}
-                <div className="sidebar-card glass-card">
-                  <h3 className="sidebar-heading-blue">Alur Penyaluran Buku</h3>
-                  <div className="how-it-works">
-                    {dropBooks.howItWorks.map((item) => (
-                      <div key={item.step} className="how-step">
-                        <div className="how-step-number">{item.step}</div>
-                        <div className="how-step-content">
-                          <strong>{item.title}</strong>
-                          <span>{item.desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="sidebar-card glass-card">
-                  <h3 className="sidebar-heading-blue">Capaian Literasi</h3>
-                  <div className="achievement-list">
-                    <div className="achievement">
-                      <FaBook className="achievement-icon icon-color-blue" />
-                      <div>
-                        <strong>{dropBooks.stats.booksDistributed.toLocaleString()}+</strong>
-                        <span>Buku Edukatif Terdistribusi</span>
-                      </div>
-                    </div>
-                    <div className="achievement">
-                      <FaMapMarkerAlt className="achievement-icon icon-color-green" />
-                      <div>
-                        <strong>{dropBooks.stats.locationsServed} Titik TBM & Sekolah</strong>
-                        <span>Lokasi Terjangkau</span>
-                      </div>
-                    </div>
-                    <div className="achievement">
-                      <FaUsers className="achievement-icon icon-color-navy" />
-                      <div>
-                        <strong>{dropBooks.stats.provinces} Provinsi</strong>
-                        <span>Jangkauan Penyaluran</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
+          <div className="program-detail-grid program-detail-reversed">
             <ScrollReveal direction="left">
               <div className="program-detail-content">
                 <div className="program-detail-icon icon-blue">
-                  <FaBook size={38} />
+                  <FaGift size={38} />
                 </div>
-                <h2 className="program-detail-title">{dropBooks.title}</h2>
-                <p className="program-detail-subtitle">{dropBooks.subtitle}</p>
+                <h2 className="program-detail-title">{programs[1].title}</h2>
+                <p className="program-detail-subtitle">{programs[1].subtitle}</p>
                 <div className="program-detail-text">
-                  {dropBooks.fullDescription.split('\n\n').map((p, i) => (
+                  {programs[1].fullDescription.split('\n\n').map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
 
-                <div className="program-cta-group">
-                  <Link to="/donasi" className="btn btn-secondary">
-                    <FaBook /> Donasikan Buku / Dana
+                <div className="how-it-works-grid">
+                  {programs[1].howItWorks.map((step) => (
+                    <div key={step.step} className="how-step-card glass-card">
+                      <div className="step-number step-number-blue">{step.step}</div>
+                      <h4>{step.title}</h4>
+                      <p>{step.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="program-cta-group" style={{ marginTop: 'var(--space-6)' }}>
+                  <Link to="/donasi" className="btn btn-primary">
+                    <FaHandHoldingHeart /> Donasi Paket Bingkisan
                   </Link>
-                  <a
-                    href="https://wa.me/6281234567890?text=Halo%20Komunitas%20Belajar%20Sedekah,%20saya%20ingin%20mengirimkan%20donasi%20buku%20untuk%20program%20Drop%20Books."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-blue"
-                  >
-                    <FaWhatsapp /> Koordinasi Donasi Buku
-                  </a>
+                  <Link to="/transparansi" className="btn btn-outline-blue">
+                    Lihat LPJ Resmi Lebaran <FaArrowRight />
+                  </Link>
                 </div>
               </div>
             </ScrollReveal>
+
+            <ScrollReveal direction="right">
+              <div className="program-sidebar">
+                <div className="sidebar-card glass-card">
+                  <h3 className="sidebar-heading-blue">Rincian Isi Bingkisan</h3>
+                  <ul className="eligibility-list">
+                    <li><FaCheckCircle className="check-icon icon-color-blue" /> <span>Beras Premium 5kg</span></li>
+                    <li><FaCheckCircle className="check-icon icon-color-blue" /> <span>Minyak Goreng 2 Liter</span></li>
+                    <li><FaCheckCircle className="check-icon icon-color-blue" /> <span>Gula Pasir & Teh Celup</span></li>
+                    <li><FaCheckCircle className="check-icon icon-color-blue" /> <span>Biskuit Kaleng & Sirup Lebaran</span></li>
+                    <li><FaCheckCircle className="check-icon icon-color-blue" /> <span>Santunan Tunai Hari Raya</span></li>
+                  </ul>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Program 3: Qurban & Kemanusiaan */}
+      <section className="program-detail section" id="qurban-kemanusiaan">
+        <div className="container">
+          <div className="program-detail-grid">
+            <ScrollReveal direction="right">
+              <div className="program-detail-content">
+                <div className="program-detail-icon icon-green">
+                  <FaGlobe size={38} />
+                </div>
+                <h2 className="program-detail-title">{programs[2].title}</h2>
+                <p className="program-detail-subtitle">{programs[2].subtitle}</p>
+                <div className="program-detail-text">
+                  {programs[2].fullDescription.split('\n\n').map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+
+                <div className="how-it-works-grid">
+                  {programs[2].howItWorks.map((step) => (
+                    <div key={step.step} className="how-step-card glass-card">
+                      <div className="step-number step-number-green">{step.step}</div>
+                      <h4>{step.title}</h4>
+                      <p>{step.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="program-cta-group" style={{ marginTop: 'var(--space-6)' }}>
+                  <Link to="/donasi" className="btn btn-primary">
+                    <FaHandHoldingHeart /> Ikut Sedekah Qurban / Kemanusiaan
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="recipients-section section" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <ScrollReveal>
+            <h2 className="section-title">Suara <span className="gradient-text-green">Penerima Manfaat</span> & Relawan</h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <p className="section-subtitle">Kisah tulus dari mereka yang tersentuh oleh kebaikan para donatur dermawan</p>
+          </ScrollReveal>
+
+          <div className="recipients-grid">
+            {recipients.map((rec, index) => (
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <div className="recipient-card glass-card">
+                  <div className="recipient-header">
+                    <div className="recipient-avatar">
+                      {rec.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="recipient-name">{rec.name}</h4>
+                      <span className="recipient-uni">{rec.university} • {rec.major}</span>
+                      <span className="recipient-batch badge-batch">{rec.batch}</span>
+                    </div>
+                  </div>
+                  <p className="recipient-quote">"{rec.quote}"</p>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
