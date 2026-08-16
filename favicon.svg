@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top Green Stylized Caring Hands / Leaves -->
+  <path d="M20 32C28 42 42 48 58 46C70 44 80 34 82 28C76 34 65 40 52 38C38 36 28 26 20 32Z" fill="#689F38" />
+  <path d="M32 24C40 34 54 38 68 36C78 34 86 26 88 20C82 26 72 30 60 28C48 26 38 18 32 24Z" fill="#7CB342" />
+  <path d="M45 15C52 23 64 26 76 24C83 22 90 15 92 10C86 16 77 19 66 17C56 15 49 10 45 15Z" fill="#8BC34A" />
+  <!-- Bottom Navy Blue Boat / Cradle -->
+  <path d="M18 42C30 58 60 62 82 48C74 54 50 56 30 46C24 43 20 40 18 42Z" fill="#0F172A" />
+  <path d="M24 50C38 64 68 66 88 52C92 50 94 48 94 48C90 58 66 68 36 60C28 58 24 53 24 50Z" fill="#0284C7" />
+  <!-- Head Dot -->
+  <circle cx="86" cy="48" r="5" fill="#14365D" />
+</svg>
