@@ -1,0 +1,88 @@
+export const galleryImages = [
+  {
+    id: 1,
+    src: '/gallery/beasiswa-1.jpg',
+    alt: 'Penyerahan Beasiswa Pandawa Batch 5',
+    category: 'Beasiswa',
+    caption: 'Penyerahan Beasiswa Pandawa Batch 5 kepada mahasiswa penerima',
+  },
+  {
+    id: 2,
+    src: '/gallery/beasiswa-2.jpg',
+    alt: 'Wisuda Penerima Beasiswa Pandawa',
+    category: 'Beasiswa',
+    caption: 'Wisuda penerima Beasiswa Pandawa yang telah menyelesaikan studi',
+  },
+  {
+    id: 3,
+    src: '/gallery/dropbooks-1.jpg',
+    alt: 'Penyaluran Buku ke Kalimantan',
+    category: 'Drop Books',
+    caption: 'Tim Drop Books menyalurkan buku ke sekolah di Kalimantan Barat',
+  },
+  {
+    id: 4,
+    src: '/gallery/dropbooks-2.jpg',
+    alt: 'Anak-anak Membaca Buku Donasi',
+    category: 'Drop Books',
+    caption: 'Anak-anak antusias membaca buku donasi dari program Drop Books',
+  },
+  {
+    id: 5,
+    src: '/gallery/event-1.jpg',
+    alt: 'Fundraising Event 2025',
+    category: 'Event',
+    caption: 'Acara fundraising tahunan Komunitas Belajar Sedekah',
+  },
+  {
+    id: 6,
+    src: '/gallery/event-2.jpg',
+    alt: 'Sosialisasi Program di Kampus',
+    category: 'Event',
+    caption: 'Sosialisasi program Belajar Sedekah di lingkungan kampus',
+  },
+  {
+    id: 7,
+    src: '/gallery/community-1.jpg',
+    alt: 'Rapat Koordinasi Tim',
+    category: 'Komunitas',
+    caption: 'Rapat koordinasi tim pengurus Komunitas Belajar Sedekah',
+  },
+  {
+    id: 8,
+    src: '/gallery/community-2.jpg',
+    alt: 'Volunteer Gathering',
+    category: 'Komunitas',
+    caption: 'Gathering tahunan relawan dan pengurus komunitas',
+  },
+  {
+    id: 9,
+    src: '/gallery/beasiswa-3.jpg',
+    alt: 'Pendampingan Akademik',
+    category: 'Beasiswa',
+    caption: 'Sesi pendampingan akademik untuk penerima beasiswa',
+  },
+  {
+    id: 10,
+    src: '/gallery/dropbooks-3.jpg',
+    alt: 'Sortir Buku Donasi',
+    category: 'Drop Books',
+    caption: 'Tim volunteer menyortir buku-buku donasi sebelum dikirim',
+  },
+  {
+    id: 11,
+    src: '/gallery/event-3.jpg',
+    alt: 'Bazar Amal',
+    category: 'Event',
+    caption: 'Bazar amal untuk menggalang dana program pendidikan',
+  },
+  {
+    id: 12,
+    src: '/gallery/community-3.jpg',
+    alt: 'Pelatihan Volunteer',
+    category: 'Komunitas',
+    caption: 'Pelatihan dan pengembangan kapasitas relawan baru',
+  },
+];
+
+export const galleryCategories = ['Semua', 'Beasiswa', 'Drop Books', 'Event', 'Komunitas'];
