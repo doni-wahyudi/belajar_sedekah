@@ -1,0 +1,58 @@
+export const dailyQuotes = [
+  {
+    id: 1,
+    text: "Sedekah itu tidak akan mengurangi harta. Tidak ada orang yang memberi maaf kecuali Allah akan menambah kemuliaannya.",
+    source: "HR. Muslim no. 2588",
+    category: "Keberkahan Harta",
+    themeColor: "#73a932",
+    tag: "Hadits Shahih",
+  },
+  {
+    id: 2,
+    text: "Bentengilah hartamu dengan zakat, obatilah orang sakit di antara kamu dengan sedekah, dan hadapilah berbagai cobaan dengan doa.",
+    source: "HR. At-Thabrani & Al-Baihaqi",
+    category: "Perlindungan & Syifa",
+    themeColor: "#0284c7",
+    tag: "Keutamaan Sedekah",
+  },
+  {
+    id: 3,
+    text: "Perumpamaan orang yang menafkahkan hartanya di jalan Allah seperti sebutir benih yang menumbuhkan tujuh bulir, pada tiap-tiap bulir seratus biji.",
+    source: "QS. Al-Baqarah: 261",
+    category: "Lipat Ganda Pahala",
+    themeColor: "#10b981",
+    tag: "Ayat Al-Qur'an",
+  },
+  {
+    id: 4,
+    text: "Sedekah secara sembunyi-sembunyi dapat memadamkan kemurkaan Allah dan menjauhkan dari kematian yang buruk.",
+    source: "HR. At-Tirmidzi",
+    category: "Keikhlasan",
+    themeColor: "#8b5cf6",
+    tag: "Hadits Shahih",
+  },
+  {
+    id: 5,
+    text: "Setiap awal pagi saat matahari terbit, dua malaikat turun. Satu berdoa: 'Ya Allah, berikanlah ganti bagi orang yang berinfak', dan yang lain berdoa: 'Ya Allah, berikanlah kebinasaan bagi orang yang menahan hartanya.'",
+    source: "HR. Bukhari & Muslim",
+    category: "Sedekah Subuh",
+    themeColor: "#f59e0b",
+    tag: "Doa Malaikat",
+  },
+  {
+    id: 6,
+    text: "Janganlah engkau menghitung-hitung sedekahmu, niscaya Allah akan menghitung-hitung karunia-Nya kepadamu. Berbagilah sedikit maupun banyak.",
+    source: "HR. Bukhari no. 1433",
+    category: "Kelapangan Hati",
+    themeColor: "#06b6d4",
+    tag: "Nasihat Bijak",
+  },
+  {
+    id: 7,
+    text: "Senyummu di depan saudaramu adalah sedekah. Menyingkirkan duri di jalan adalah sedekah. Membantu sesama adalah jalan keberkahan hidup.",
+    source: "HR. At-Tirmidzi no. 1956",
+    category: "Kebaikan Sehari-hari",
+    themeColor: "#73a932",
+    tag: "Aksi Nyata",
+  }
+];

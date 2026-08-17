@@ -1,0 +1,136 @@
+/* ============================================
+   HOME PAGE - CTA BANNER
+   ============================================ */
+.cta-section {
+  padding: var(--space-24) 0;
+}
+
+.cta-banner {
+  padding: var(--space-16) var(--space-12);
+  text-align: center;
+  background: linear-gradient(135deg, rgba(7, 21, 38, 0.95), rgba(12, 33, 60, 0.92), rgba(21, 60, 48, 0.9));
+  border: 1px solid rgba(141, 198, 63, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme='light'] .cta-banner {
+  background: linear-gradient(135deg, #0f2444 0%, #0c3d2c 60%, #0f3060 100%) !important;
+  border: 1px solid rgba(115, 169, 50, 0.25) !important;
+  box-shadow: 0 16px 48px rgba(15, 36, 68, 0.18) !important;
+}
+
+/* Override glass-card:hover that would wash out the dark background in light mode */
+[data-theme='light'] .cta-banner:hover {
+  background: linear-gradient(135deg, #0f2444 0%, #0c3d2c 60%, #0f3060 100%) !important;
+  border-color: rgba(141, 198, 63, 0.45) !important;
+  transform: none !important;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(141, 198, 63, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-size: var(--text-4xl);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cta-content p {
+  font-size: var(--text-lg);
+  color: rgba(248, 250, 252, 0.82);
+  line-height: 1.75;
+  margin-bottom: var(--space-10);
+}
+
+[data-theme='light'] .cta-content h2 {
+  color: #ffffff;
+}
+
+[data-theme='light'] .cta-content p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   HOME NEWS SECTION — ensure news-category has color
+   ============================================ */
+.news-category {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  background: rgba(115, 169, 50, 0.15);
+  color: var(--color-primary-light);
+  border: 1px solid rgba(141, 198, 63, 0.3);
+}
+
+[data-theme='light'] .news-category {
+  color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .cta-banner {
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .cta-content h2 {
+    font-size: var(--text-3xl);
+  }
+
+  .cta-content p {
+    font-size: var(--text-base);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-content h2 {
+    font-size: var(--text-2xl);
+  }
+}

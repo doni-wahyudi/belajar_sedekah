@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { FaTimes, FaChevronLeft, FaChevronRight, FaCamera } from 'react-icons/fa';
+import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { FaTimes, FaChevronLeft, FaChevronRight, FaCamera, FaMapMarkerAlt, FaCalendarAlt, FaHandsHelping, FaExpand, FaHeart, FaTag } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import { galleryImages, galleryCategories } from '../data/gallery';
 import './Gallery.css';
@@ -11,7 +12,7 @@ export default function Gallery() {
 
   const filteredImages = activeCategory === 'Semua'
     ? galleryImages
-    : galleryImages.filter(img => img.category === activeCategory);
+    : galleryImages.filter((img) => img.category === activeCategory);
 
   const openLightbox = (index) => {
     setActiveIndex(index);
@@ -19,32 +20,34 @@ export default function Gallery() {
     document.body.style.overflow = 'hidden';
   };
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
     document.body.style.overflow = '';
-  };
+  }, []);
 
-  const navigateLightbox = (dir) => {
+  const navigateLightbox = useCallback((dir) => {
     setActiveIndex((prev) => {
       const next = prev + dir;
       if (next < 0) return filteredImages.length - 1;
       if (next >= filteredImages.length) return 0;
       return next;
     });
-  };
+  }, [filteredImages.length]);
 
-  // Generate brand-aligned placeholder styles (Green, Blue, Teal, Navy)
-  const getPlaceholderStyle = (id) => {
-    const gradients = [
-      'linear-gradient(135deg, #558b2f 0%, #8dc63f 100%)',
-      'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)',
-      'linear-gradient(135deg, #0f2444 0%, #1e3a8a 100%)',
-      'linear-gradient(135deg, #0d9488 0%, #34d399 100%)',
-      'linear-gradient(135deg, #659b27 0%, #0284c7 100%)',
-      'linear-gradient(135deg, #1e3a8a 0%, #60a5fa 100%)',
-    ];
-    return { background: gradients[(id - 1) % gradients.length] };
-  };
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, closeLightbox, navigateLightbox]);
+
+  const activePhoto = filteredImages[activeIndex] || filteredImages[0];
 
   return (
     <div className="gallery-page">
@@ -54,51 +57,85 @@ export default function Gallery() {
         <div className="container page-hero-content">
           <ScrollReveal>
             <h1 className="page-hero-title">
-              Galeri <span className="gradient-text-green">Kegiatan</span> & <span className="gradient-text-blue">Dokumentasi</span>
+              Galeri <span className="gradient-text-green">Aksi Sosial</span> & <span className="gradient-text-blue">Dokumentasi</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Momen-momen bermakna dalam menyalurkan amanah pendidikan, donasi buku,
-              dan kebersamaan relawan Komunitas Belajar Sedekah
+              Rekam jejak visual dari setiap amanah donatur yang kami salurkan secara langsung ke lapangan:
+              Jum'at Berkah, Paket Bingkisan Lebaran, Qurban Pelosok, dan kolaborasi kepemudaan di Lampung.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* Gallery Section */}
       <section className="gallery-section section">
         <div className="container">
           {/* Filters */}
           <ScrollReveal>
-            <div className="gallery-filters">
-              {galleryCategories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`filter-btn ${activeCategory === cat ? 'filter-active' : ''}`}
-                  onClick={() => setActiveCategory(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div className="gallery-filters-wrapper">
+              <div className="gallery-filters">
+                {galleryCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    className={`gallery-filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                    onClick={() => setActiveCategory(cat)}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+              <span className="gallery-count-badge">
+                Menampilkan {filteredImages.length} dokumentasi
+              </span>
             </div>
           </ScrollReveal>
 
-          {/* Grid */}
+          {/* Grid of Cards */}
           <div className="gallery-grid">
             {filteredImages.map((image, index) => (
               <ScrollReveal key={image.id} delay={index * 0.05}>
                 <div
-                  className="gallery-item"
+                  className="gallery-card glass-card"
                   onClick={() => openLightbox(index)}
-                  style={getPlaceholderStyle(image.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
                 >
-                  <div className="gallery-item-overlay">
-                    <span className="gallery-item-category">{image.category}</span>
-                    <p className="gallery-item-caption">{image.caption}</p>
+                  {/* Photo Visual Banner */}
+                  <div className="gallery-card-banner" style={{ background: image.bgGradient }}>
+                    <div className="gallery-card-icon-wrap">
+                      <FaCamera />
+                    </div>
+                    <span className="gallery-impact-pill">{image.impactTag}</span>
+                    <div className="gallery-card-hover-overlay">
+                      <FaExpand className="expand-icon" />
+                      <span>Lihat Detail Foto</span>
+                    </div>
                   </div>
-                  <div className="gallery-item-icon">
-                    <FaCamera />
+
+                  {/* Card Info Body */}
+                  <div className="gallery-card-body">
+                    <div className="gallery-card-meta-top">
+                      <span className="gallery-card-cat">
+                        <FaTag className="meta-icon" /> {image.category}
+                      </span>
+                      <span className="gallery-card-date">
+                        <FaCalendarAlt className="meta-icon" /> {image.date}
+                      </span>
+                    </div>
+
+                    <h3 className="gallery-card-title">{image.title}</h3>
+                    <p className="gallery-card-caption">{image.caption}</p>
+
+                    <div className="gallery-card-footer">
+                      <span className="gallery-card-loc">
+                        <FaMapMarkerAlt className="loc-icon" /> {image.location}
+                      </span>
+                      <span className="gallery-card-action">Buka Lightbox →</span>
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>
@@ -107,29 +144,76 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxOpen && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-close" onClick={closeLightbox} aria-label="Tutup lightbox">
-            <FaTimes size={24} />
+      {/* Lightbox Modal */}
+      {lightboxOpen && activePhoto && (
+        <div className="lightbox-backdrop" onClick={closeLightbox}>
+          <button className="lightbox-btn-close" onClick={closeLightbox} aria-label="Tutup foto">
+            <FaTimes />
           </button>
-          <button className="lightbox-nav lightbox-prev" onClick={(e) => { e.stopPropagation(); navigateLightbox(-1); }} aria-label="Foto sebelumnya">
-            <FaChevronLeft size={24} />
+
+          <button
+            className="lightbox-btn-nav prev"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateLightbox(-1);
+            }}
+            aria-label="Foto sebelumnya"
+          >
+            <FaChevronLeft />
           </button>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <div className="lightbox-image" style={getPlaceholderStyle(filteredImages[activeIndex]?.id)}>
-              <div className="lightbox-image-icon">
-                <FaCamera size={64} />
+
+          <div className="lightbox-modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* Visual Screen */}
+            <div className="lightbox-visual" style={{ background: activePhoto.bgGradient }}>
+              <div className="lightbox-visual-center">
+                <FaCamera className="lightbox-camera-icon" />
+                <span className="lightbox-impact-badge">{activePhoto.impactTag}</span>
               </div>
             </div>
-            <div className="lightbox-info">
-              <span className="lightbox-category">{filteredImages[activeIndex]?.category}</span>
-              <p className="lightbox-caption">{filteredImages[activeIndex]?.caption}</p>
-              <span className="lightbox-counter">{activeIndex + 1} / {filteredImages.length}</span>
+
+            {/* Detail Drawer */}
+            <div className="lightbox-details">
+              <div className="lightbox-tag-row">
+                <span className="lightbox-category-pill">{activePhoto.category}</span>
+                <span className="lightbox-counter-pill">
+                  {activeIndex + 1} dari {filteredImages.length}
+                </span>
+              </div>
+
+              <h2 className="lightbox-title">{activePhoto.title}</h2>
+
+              <div className="lightbox-meta-row">
+                <span><FaMapMarkerAlt className="loc-pin" /> {activePhoto.location}</span>
+                <span><FaCalendarAlt className="cal-icon" /> {activePhoto.date}</span>
+              </div>
+
+              <p className="lightbox-full-caption">{activePhoto.caption}</p>
+
+              <div className="lightbox-actions-group">
+                <Link to="/donasi" className="btn btn-primary" onClick={closeLightbox}>
+                  <FaHeart /> Dukung Aksi Serupa
+                </Link>
+                <a
+                  href="https://www.instagram.com/belajarsedekah.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                >
+                  Lihat Dokumentasi Instagram
+                </a>
+              </div>
             </div>
           </div>
-          <button className="lightbox-nav lightbox-next" onClick={(e) => { e.stopPropagation(); navigateLightbox(1); }} aria-label="Foto selanjutnya">
-            <FaChevronRight size={24} />
+
+          <button
+            className="lightbox-btn-nav next"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateLightbox(1);
+            }}
+            aria-label="Foto selanjutnya"
+          >
+            <FaChevronRight />
           </button>
         </div>
       )}

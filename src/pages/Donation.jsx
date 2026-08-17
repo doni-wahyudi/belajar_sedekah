@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaHandHoldingHeart, FaUniversity, FaQrcode, FaCalculator, FaArrowRight, FaHeart, FaWhatsapp, FaCheckCircle, FaShieldAlt, FaUsers, FaTiktok, FaInstagram } from 'react-icons/fa';
+import { FaHandHoldingHeart, FaUniversity, FaQrcode, FaCalculator, FaArrowRight, FaHeart, FaWhatsapp, FaCheckCircle, FaShieldAlt, FaUsers, FaTiktok, FaInstagram, FaCopy, FaCheck, FaLock } from 'react-icons/fa';
 import { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import './Donation.css';
@@ -132,43 +132,74 @@ export default function Donation() {
             <p className="section-subtitle">Salurkan infaq & sedekah terbaik Anda langsung ke rekening resmi yang amanah</p>
           </ScrollReveal>
 
-          <div className="bank-grid" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="bank-card-container">
             {bankAccounts.map((account, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
-                <div className="bank-card" style={{ background: account.color }}>
-                  <div className="bank-card-header">
-                    <span className="bank-code">{account.code}</span>
-                    <FaUniversity className="bank-icon" />
-                  </div>
-                  <div className="bank-card-number">
-                    {account.accountNumber}
-                  </div>
-                  <div className="bank-card-footer">
-                    <div>
-                      <span className="bank-holder-label">Atas Nama</span>
-                      <span className="bank-holder-name">{account.accountName}</span>
+                <div className="debit-card-wrapper">
+                  <div className="debit-card">
+                    <div className="debit-card-glow" />
+                    
+                    {/* Card Top Row */}
+                    <div className="debit-card-top">
+                      <div className="bank-brand">
+                        <div className="bank-logo-badge">
+                          <FaUniversity />
+                        </div>
+                        <div className="bank-brand-text">
+                          <span className="bank-brand-title">BANK BSI</span>
+                          <span className="bank-brand-sub">Bank Syariah Indonesia (Kode: 451)</span>
+                        </div>
+                      </div>
+                      <span className="account-type-badge">REKENING RESMI</span>
                     </div>
-                    <button
-                      className={`copy-btn ${copied === index ? 'copy-btn-success' : ''}`}
-                      onClick={() => copyToClipboard(account.accountNumber, index)}
-                    >
-                      {copied === index ? (
-                        <>
-                          <FaCheckCircle /> Tersalin!
-                        </>
-                      ) : (
-                        'Salin Rekening'
-                      )}
-                    </button>
+
+                    {/* Card Chip & Contactless */}
+                    <div className="debit-card-middle">
+                      <div className="card-chip">
+                        <div className="chip-inner"></div>
+                      </div>
+                      <div className="contactless-waves">
+                        <span></span><span></span><span></span>
+                      </div>
+                    </div>
+
+                    {/* Card Number */}
+                    <div className="debit-card-number-row">
+                      <span className="debit-card-number">{account.accountNumber}</span>
+                    </div>
+
+                    {/* Card Bottom Row */}
+                    <div className="debit-card-bottom">
+                      <div className="card-holder-info">
+                        <span className="card-holder-label">NAMA PEMILIK REKENING</span>
+                        <span className="card-holder-name">{account.accountName}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className={`card-copy-btn ${copied === index ? 'copied' : ''}`}
+                        onClick={() => copyToClipboard(account.accountNumber, index)}
+                        title="Salin nomor rekening BSI"
+                      >
+                        {copied === index ? (
+                          <>
+                            <FaCheck /> Tersalin!
+                          </>
+                        ) : (
+                          <>
+                            <FaCopy /> Salin Rekening
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </ScrollReveal>
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: 'var(--space-6)' }}>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              🔒 Rekening resmi terverifikasi atas nama Founder Komunitas Belajar Sedekah: <strong>Despa Putri Lestari</strong>
+          <div className="bank-security-notice">
+            <p>
+              <FaLock className="lock-icon" /> Rekening resmi terverifikasi atas nama Founder Komunitas Belajar Sedekah: <strong>Despa Putri Lestari</strong> • Amanah & Tercatat di LPJ
             </p>
           </div>
         </div>

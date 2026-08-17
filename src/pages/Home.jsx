@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom';
 import { FaHandHoldingHeart, FaUsers, FaMapMarkerAlt, FaCalendarAlt, FaArrowRight, FaHeart, FaGift, FaGlobe, FaWhatsapp, FaTiktok, FaInstagram } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import Counter from '../components/Counter';
+import DailyQuotesWidget from '../components/DailyQuotesWidget';
+import WallOfKindness from '../components/WallOfKindness';
+import InstagramFeed from '../components/InstagramFeed';
 import { programs } from '../data/programs';
 import { newsArticles } from '../data/news';
 import './Home.css';
+import './Home.cta.css';
 
 export default function Home() {
   const latestNews = newsArticles.slice(0, 3);
@@ -121,6 +125,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Daily Quotes & Sedekah Reminder Widget */}
+      <section className="daily-quotes-section section" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-16)' }}>
+        <div className="container">
+          <ScrollReveal>
+            <DailyQuotesWidget />
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Programs Section */}
       <section className="programs-section section">
         <div className="container">
@@ -209,6 +222,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Wall of Kindness */}
+      <WallOfKindness />
+
       {/* Latest News */}
       <section className="news-section section">
         <div className="container">
@@ -254,6 +270,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Instagram Feed Showcase */}
+      <InstagramFeed />
 
       {/* CTA Banner */}
       <section className="cta-section section">

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { FaHeart, FaGift, FaGlobe, FaUsers, FaCheckCircle, FaArrowRight, FaMapMarkerAlt, FaWhatsapp, FaHandHoldingHeart } from 'react-icons/fa';
+import { FaHeart, FaGift, FaGlobe, FaUsers, FaCheckCircle, FaArrowRight, FaMapMarkerAlt, FaWhatsapp, FaHandHoldingHeart, FaQuoteLeft, FaStar } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import { programs, recipients } from '../data/programs';
 import './Programs.css';
@@ -229,19 +229,51 @@ export default function Programs() {
 
           <div className="recipients-grid">
             {recipients.map((rec, index) => (
-              <ScrollReveal key={index} delay={index * 0.1}>
-                <div className="recipient-card glass-card">
-                  <div className="recipient-header">
-                    <div className="recipient-avatar">
+              <ScrollReveal key={rec.id || index} delay={index * 0.1} className="recipient-card-wrapper">
+                <div className="testimonial-card">
+                  <div className="testimonial-top-accent" style={{ background: rec.badgeColor }} />
+                  
+                  {/* Header: Stars & Program Badge */}
+                  <div className="testimonial-header">
+                    <div className="testimonial-stars" aria-label="5 bintang">
+                      {[...Array(rec.stars || 5)].map((_, i) => (
+                        <FaStar key={i} className="star-icon" />
+                      ))}
+                    </div>
+                    <span
+                      className="testimonial-badge"
+                      style={{
+                        color: rec.badgeColor,
+                        borderColor: `${rec.badgeColor}45`,
+                        backgroundColor: `${rec.badgeColor}15`,
+                      }}
+                    >
+                      {rec.program}
+                    </span>
+                  </div>
+
+                  {/* Body: Quote Text with Decorative Quote Mark */}
+                  <div className="testimonial-body">
+                    <FaQuoteLeft className="testimonial-watermark" />
+                    <p className="testimonial-quote">"{rec.quote}"</p>
+                  </div>
+
+                  {/* Footer: Author Profile Info */}
+                  <div className="testimonial-footer">
+                    <div className="testimonial-avatar" style={{ background: rec.avatarBg }}>
                       {rec.name.charAt(0)}
                     </div>
-                    <div>
-                      <h4 className="recipient-name">{rec.name}</h4>
-                      <span className="recipient-uni">{rec.university} • {rec.major}</span>
-                      <span className="recipient-batch badge-batch">{rec.batch}</span>
+                    <div className="testimonial-info">
+                      <div className="testimonial-name-row">
+                        <h4 className="testimonial-name">{rec.name}</h4>
+                        {rec.age && <span className="testimonial-age">({rec.age})</span>}
+                      </div>
+                      <p className="testimonial-role">{rec.role}</p>
+                      <span className="testimonial-location">
+                        <FaMapMarkerAlt className="loc-icon" /> {rec.location}
+                      </span>
                     </div>
                   </div>
-                  <p className="recipient-quote">"{rec.quote}"</p>
                 </div>
               </ScrollReveal>
             ))}

@@ -1,6 +1,61 @@
 /* ============================================
    HERO SECTION - BRAND GREEN / NAVY / WHITE
    ============================================ */
+
+/* CTA Banner & News Category — added here */
+.cta-section { padding: var(--space-24) 0; }
+
+.cta-banner {
+  padding: var(--space-16) var(--space-12);
+  text-align: center;
+  background: linear-gradient(135deg, rgba(7,21,38,0.95), rgba(12,33,60,0.92), rgba(21,60,48,0.9));
+  border: 1px solid rgba(141,198,63,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(141,198,63,0.15), transparent 70%);
+  pointer-events: none;
+}
+.cta-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(2,132,199,0.12), transparent 70%);
+  pointer-events: none;
+}
+.cta-content {
+  position: relative; z-index: 1;
+  max-width: 680px; margin: 0 auto;
+}
+.cta-content h2 {
+  font-size: var(--text-4xl); font-weight: 900;
+  color: #ffffff; margin-bottom: var(--space-4);
+  letter-spacing: -0.02em; line-height: 1.2;
+}
+.cta-content p {
+  font-size: var(--text-lg); color: rgba(248,250,252,0.82);
+  line-height: 1.75; margin-bottom: var(--space-10);
+}
+.cta-buttons {
+  display: flex; gap: var(--space-4);
+  justify-content: center; flex-wrap: wrap;
+}
+.news-category {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs); font-weight: 700;
+  border-radius: var(--radius-full);
+  background: rgba(115,169,50,0.15);
+  color: var(--color-primary-light);
+  border: 1px solid rgba(141,198,63,0.3);
+}
+[data-theme='light'] .news-category { color: var(--color-primary-dark); }
+
 .hero {
   position: relative;
   min-height: 100vh;
