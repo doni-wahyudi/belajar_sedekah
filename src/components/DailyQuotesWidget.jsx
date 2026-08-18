@@ -32,7 +32,7 @@ export default function DailyQuotesWidget() {
   };
 
   const getWhatsAppShareUrl = () => {
-    const message = `✨ *Pengingat Sedekah Hari Ini*\n\n"${currentQuote.text}"\n\n— *${currentQuote.source}*\n\n🪴 _Temanmu belajar, berbagi, dan bertumbuh setiap hari_\n@belajarsedekah.id • doni-wahyudi.github.io/belajar_sedekah/`;
+    const message = `✨ *Pengingat Sedekah Hari Ini*\n\n"${currentQuote.text}"\n\n— *${currentQuote.source}*\n\n🪴 _Temanmu belajar, berbagi, dan bertumbuh setiap hari_\n@belajarsedekah.id • belajarsedekah.id`;
     return `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
   };
 

@@ -3,10 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://doni-wahyudi.github.io/belajar_sedekah",
+  "homepage": "https://belajarsedekah.id",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node -e \"const fs=require('fs'); if(fs.existsSync('public/CNAME')) fs.copyFileSync('public/CNAME', 'dist/CNAME');\"",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
