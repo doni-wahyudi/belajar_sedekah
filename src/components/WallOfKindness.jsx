@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { FaHeart, FaHandsHelping, FaPaperPlane, FaUserCircle, FaMapMarkerAlt, FaCalendarAlt, FaCheckCircle, FaPray } from 'react-icons/fa';
 import { initialPrayers, prayerTags } from '../data/wallOfKindness';
+import { 
+  fetchKindnessMessages, 
+  subscribeKindnessMessages, 
+  submitKindnessMessage, 
+  likeKindnessMessage 
+} from '../services/wallService';
 import ScrollReveal from './ScrollReveal';
 import './WallOfKindness.css';
 
@@ -8,18 +14,7 @@ const STORAGE_KEY = 'belajar_sedekah_prayers';
 const LIKED_KEY = 'belajar_sedekah_liked_prayers';
 
 export default function WallOfKindness() {
-  const [prayers, setPrayers] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        return Array.isArray(parsed) && parsed.length > 0 ? parsed : initialPrayers;
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    return initialPrayers;
-  });
+  const [prayers, setPrayers] = useState(initialPrayers);
 
   const [likedIds, setLikedIds] = useState(() => {
     try {
@@ -33,6 +28,7 @@ export default function WallOfKindness() {
   const [activeTag, setActiveTag] = useState('Semua Doa');
   const [formOpen, setFormOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // Form State
   const [authorName, setAuthorName] = useState('');
@@ -41,12 +37,27 @@ export default function WallOfKindness() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(prayers));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [prayers]);
+    let isMounted = true;
+
+    // Fetch from Supabase
+    fetchKindnessMessages().then((data) => {
+      if (isMounted && data && data.length > 0) {
+        setPrayers(data);
+      }
+    });
+
+    // Realtime subscription
+    const unsubscribe = subscribeKindnessMessages((newMessage) => {
+      if (isMounted && newMessage) {
+        setPrayers((prev) => [newMessage, ...prev.filter(p => p.id !== newMessage.id)]);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -56,18 +67,23 @@ export default function WallOfKindness() {
     }
   }, [likedIds]);
 
-  const handleLike = (id) => {
+  const handleLike = async (id) => {
     if (likedIds.includes(id)) return; // Already liked
 
     setPrayers((prev) =>
       prev.map((p) => (p.id === id ? { ...p, likes: (p.likes || 0) + 1 } : p))
     );
     setLikedIds((prev) => [...prev, id]);
+
+    // Send like increment to Supabase
+    await likeKindnessMessage(id);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || submitting) return;
+
+    setSubmitting(true);
 
     const gradients = [
       'linear-gradient(135deg, #15803d, #4ade80)',
@@ -84,8 +100,7 @@ export default function WallOfKindness() {
       year: 'numeric',
     });
 
-    const newPrayer = {
-      id: Date.now(),
+    const newPrayerPayload = {
       author: authorName.trim() || 'Hamba Allah',
       location: location.trim() || 'Lampung',
       role: 'Donatur / Sobat BS',
@@ -96,7 +111,17 @@ export default function WallOfKindness() {
       avatarBg: randomBg,
     };
 
-    setPrayers([newPrayer, ...prayers]);
+    // Optimistic UI update
+    const tempId = Date.now();
+    setPrayers((prev) => [{ ...newPrayerPayload, id: tempId }, ...prev]);
+
+    // Send to Supabase
+    const res = await submitKindnessMessage(newPrayerPayload);
+    if (res.success && res.data && !res.isMock) {
+      setPrayers((prev) => prev.map(p => p.id === tempId ? res.data : p));
+    }
+
+    setSubmitting(false);
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -149,86 +174,95 @@ export default function WallOfKindness() {
 
           <button
             type="button"
-            className="btn btn-primary btn-write-prayer"
+            className="btn btn-primary btn-sm btn-open-prayer-form"
             onClick={() => setFormOpen(!formOpen)}
           >
-            <FaPray /> {formOpen ? 'Tutup Formulir Doa' : 'Kirim Doa & Harapan'}
+            <FaPray /> {formOpen ? 'Tutup Formulir' : 'Tuliskan Doa & Harapan'}
           </button>
         </div>
 
-        {/* Modal / Inline Submission Form */}
+        {/* Expandable Prayer Form */}
         {formOpen && (
           <ScrollReveal>
             <form className="prayer-form-card glass-card" onSubmit={handleSubmit}>
-              <div className="form-title-row">
-                <FaPray className="form-icon" />
-                <div>
-                  <h3>Kirimkan Doa / Pesan Kebaikan</h3>
-                  <p>Doa Anda akan tampil langsung di Wall of Kindness Belajar Sedekah</p>
-                </div>
-              </div>
+              <h3 className="prayer-form-title">
+                <FaPaperPlane /> Kirimkan Doa Kebaikan
+              </h3>
+              <p className="prayer-form-desc">
+                Doa Anda akan ditampilkan di Wall of Kindness dan dibaca oleh seluruh relawan & sesama donatur.
+              </p>
 
               {submitted ? (
-                <div className="form-success-banner">
-                  <FaCheckCircle className="success-icon" />
-                  <h4>Jazakumullah Khairan Katsiran!</h4>
-                  <p>Doa tulus Anda telah berhasil dipublikasikan.</p>
+                <div className="prayer-success-alert">
+                  <FaCheckCircle size={28} />
+                  <div>
+                    <strong>Jazakumullah Khairan Katsiran!</strong>
+                    <p>Doa tulus Anda telah diterbitkan di Wall of Kindness.</p>
+                  </div>
                 </div>
               ) : (
                 <>
-                  <div className="form-grid-inputs">
+                  <div className="prayer-form-row">
                     <div className="form-group">
-                      <label>Nama Anda (Boleh Anonim / 'Hamba Allah')</label>
+                      <label htmlFor="prayer-author">Nama Anda / Inisial</label>
                       <input
+                        id="prayer-author"
                         type="text"
-                        placeholder="Contoh: Hamba Allah / Rina"
+                        placeholder="Contoh: Hamba Allah / Sarah"
                         value={authorName}
                         onChange={(e) => setAuthorName(e.target.value)}
-                        className="form-input"
+                        maxLength={50}
                       />
                     </div>
                     <div className="form-group">
-                      <label>Kota / Wilayah Asal</label>
+                      <label htmlFor="prayer-location">Kota / Daerah Asal</label>
                       <input
+                        id="prayer-location"
                         type="text"
-                        placeholder="Contoh: Bandar Lampung / Metro"
+                        placeholder="Contoh: Bandar Lampung / Pringsewu"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
-                        className="form-input"
+                        maxLength={50}
                       />
                     </div>
-                    <div className="form-group full-width">
-                      <label>Terkait Program / Kategori</label>
+                    <div className="form-group">
+                      <label htmlFor="prayer-tag">Program / Kategori</label>
                       <select
+                        id="prayer-tag"
                         value={programTag}
                         onChange={(e) => setProgramTag(e.target.value)}
-                        className="form-input form-select"
                       >
-                        <option value="Jum'at Berkah 💌">Jum'at Berkah 💌</option>
-                        <option value="Bingkisan Lebaran 🎁">Bingkisan Lebaran 🎁</option>
-                        <option value="Qurban Pelosok 🐑">Qurban Pelosok 🐑</option>
-                        <option value="Sobat BS 🪴">Sobat BS 🪴</option>
+                        {prayerTags.filter(t => t !== 'Semua Doa').map(tag => (
+                          <option key={tag} value={tag}>{tag}</option>
+                        ))}
                       </select>
-                    </div>
-                    <div className="form-group full-width">
-                      <label>Tuliskan Doa / Harapan Anda *</label>
-                      <textarea
-                        required
-                        rows="3"
-                        placeholder="Tuliskan doa kebaikan untuk sesama, mustahik, atau keluarga tercinta..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className="form-input form-textarea"
-                      />
                     </div>
                   </div>
 
-                  <div className="form-actions">
-                    <button type="button" className="btn btn-outline" onClick={() => setFormOpen(false)}>
-                      Batal
+                  <div className="form-group">
+                    <label htmlFor="prayer-message">Untaian Doa & Harapan *</label>
+                    <textarea
+                      id="prayer-message"
+                      rows={3}
+                      placeholder="Tuliskan doa kebaikan, harapan untuk adik-adik dhuafa, atau semangat untuk tim relawan..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
+                      maxLength={300}
+                    />
+                    <span className="char-count">{message.length}/300 karakter</span>
+                  </div>
+
+                  <div className="form-action-row">
+                    <button type="submit" className="btn btn-primary" disabled={submitting}>
+                      <FaPaperPlane /> {submitting ? 'Mengirim...' : 'Terbitkan Doa'}
                     </button>
-                    <button type="submit" className="btn btn-primary">
-                      <FaPaperPlane /> Publikasikan Doa
+                    <button
+                      type="button"
+                      className="btn btn-outline btn-sm"
+                      onClick={() => setFormOpen(false)}
+                    >
+                      Batal
                     </button>
                   </div>
                 </>
@@ -237,42 +271,46 @@ export default function WallOfKindness() {
           </ScrollReveal>
         )}
 
-        {/* Grid of Prayer Cards */}
-        <div className="prayers-grid">
+        {/* Prayer Grid */}
+        <div className="prayers-masonry-grid">
           {filteredPrayers.map((prayer) => {
             const isLiked = likedIds.includes(prayer.id);
             return (
               <div key={prayer.id} className="prayer-card glass-card">
                 <div className="prayer-card-top">
                   <div className="prayer-avatar" style={{ background: prayer.avatarBg }}>
-                    {prayer.author.charAt(0).toUpperCase()}
+                    {prayer.author === 'Hamba Allah' ? 'HA' : (prayer.author || 'BS').slice(0, 2).toUpperCase()}
                   </div>
-                  <div className="prayer-author-info">
-                    <h4 className="prayer-author-name">{prayer.author}</h4>
-                    <span className="prayer-location">
-                      <FaMapMarkerAlt className="loc-pin" /> {prayer.location}
-                    </span>
+                  <div className="prayer-author-meta">
+                    <strong className="prayer-author-name">{prayer.author}</strong>
+                    <div className="prayer-sub-meta">
+                      <span className="prayer-location"><FaMapMarkerAlt size={10} /> {prayer.location}</span>
+                      <span className="meta-bullet">•</span>
+                      <span className="prayer-role">{prayer.role}</span>
+                    </div>
                   </div>
-                  <span className="prayer-program-tag">{prayer.programTag}</span>
                 </div>
 
-                <div className="prayer-message-body">
-                  <p>“{prayer.message}”</p>
+                <div className="prayer-tag-pill">
+                  {prayer.programTag}
                 </div>
+
+                <p className="prayer-body-text">
+                  "{prayer.message}"
+                </p>
 
                 <div className="prayer-card-footer">
                   <span className="prayer-date">
-                    <FaCalendarAlt className="date-icon" /> {prayer.date}
+                    <FaCalendarAlt size={11} /> {prayer.date}
                   </span>
                   <button
                     type="button"
-                    className={`btn-aamiin ${isLiked ? 'liked' : ''}`}
+                    className={`btn-amin-like ${isLiked ? 'liked' : ''}`}
                     onClick={() => handleLike(prayer.id)}
-                    title="Aminkan doa ini"
+                    title="Aminkan Doa"
                   >
-                    <span className="aamiin-hands">🤲</span>
-                    <span className="aamiin-label">{isLiked ? 'Diaminkan' : 'Aamiin'}</span>
-                    <span className="aamiin-count">{prayer.likes || 0}</span>
+                    <FaHeart size={12} />
+                    <span>Aamiin ({prayer.likes || 0})</span>
                   </button>
                 </div>
               </div>
