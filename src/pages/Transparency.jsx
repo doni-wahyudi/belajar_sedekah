@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaChartBar, FaChartPie, FaCalendarAlt, FaArrowUp, FaArrowDown, FaFileAlt, FaShieldAlt, FaExternalLinkAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaChartBar, FaChartPie, FaCalendarAlt, FaArrowUp, FaArrowDown, FaFileAlt, FaShieldAlt, FaExternalLinkAlt, FaCheckCircle, FaHeart, FaUsers } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import Counter from '../components/Counter';
 import { yearlyReports, impactStats, fundAllocation } from '../data/transparency';
@@ -24,66 +24,109 @@ export default function Transparency() {
         <div className="page-hero-bg" />
         <div className="container page-hero-content">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker kicker-blue">
+                <span className="kicker-bullet">📊</span> 100% Akuntabilitas Terbuka
+              </span>
+            </div>
             <h1 className="page-hero-title">
               Transparansi & <span className="gradient-text-green">Akuntabilitas</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Komitmen amanah Komunitas Belajar Sedekah: setiap rupiah yang kami kelola dilaporkan
-              secara terbuka melalui Laporan Pertanggungjawaban (LPJ) yang dapat diakses publik.
+              Komitmen amanah Komunitas Belajar Sedekah: setiap rupiah yang kami kelola dilaporkan secara terbuka melalui Laporan Pertanggungjawaban (LPJ) resmi yang dapat diakses publik.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Overview Stats */}
-      <section className="transparency-overview">
+      {/* Asymmetrical Impact Bento Overview (Anti-AI-Slop) */}
+      <section className="transparency-overview section">
         <div className="container">
-          <div className="overview-grid">
-            <ScrollReveal>
-              <div className="overview-card glass-card">
-                <div className="overview-icon overview-icon-green">
-                  <FaChartBar />
+          <div className="impact-asymmetric-bento">
+            {/* Left Big Highlight Card */}
+            <ScrollReveal direction="right" className="bento-main-col">
+              <div className="bento-highlight-card glass-card">
+                <div className="highlight-card-top">
+                  <span className="highlight-pill">REKAPITULASI DANA TERHIMPUN (2022–2026)</span>
+                  <span className="audit-badge">
+                    <FaCheckCircle /> LPJ Terbuka Publik
+                  </span>
                 </div>
-                <div className="overview-value">{impactStats.totalDonationsReceived}</div>
-                <div className="overview-label">Total Donasi Dikelola (Est. 2022–2026)</div>
+
+                <div className="highlight-main-body">
+                  <div className="highlight-number-wrap">
+                    <span className="highlight-currency">Rp</span>
+                    <h2 className="highlight-total-amount">95.000.000<span className="highlight-plus">+</span></h2>
+                  </div>
+                  <p className="highlight-desc">
+                    Total amanah sedekah dari ratusan donatur & Sobat BS di seluruh Indonesia yang telah disalurkan 100% ke berbagai program kemanusiaan, Jum'at Berkah mingguan, dan sembako dhuafa di Lampung.
+                  </p>
+                </div>
+
+                <div className="highlight-card-footer">
+                  <div className="highlight-meta-item">
+                    <span className="meta-label">Rekening Resmi:</span>
+                    <strong>BSI 7234856318</strong>
+                  </div>
+                  <div className="highlight-meta-item">
+                    <span className="meta-label">Biaya Potongan:</span>
+                    <strong className="text-green">0% (Bebas Potongan)</strong>
+                  </div>
+                  <div className="highlight-meta-item">
+                    <span className="meta-label">Status LPJ:</span>
+                    <strong className="text-blue">Google Docs Terbuka</strong>
+                  </div>
+                </div>
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.1}>
-              <div className="overview-card glass-card">
-                <div className="overview-icon overview-icon-blue">
-                  <FaChartPie />
+            {/* Right Stacked 2 Cards */}
+            <div className="bento-side-stack">
+              <ScrollReveal delay={0.1}>
+                <div className="side-metric-card glass-card">
+                  <div className="side-metric-icon green">
+                    <FaUsers />
+                  </div>
+                  <div className="side-metric-body">
+                    <h3 className="side-metric-val">
+                      <Counter end={impactStats.totalBeneficiaries} suffix="+" />
+                    </h3>
+                    <span className="side-metric-label">Penerima Manfaat Terbantu</span>
+                    <p className="side-metric-sub">Pekerja jalanan, lansia dhuafa, dan anak yatim binaan di 24 titik Lampung</p>
+                  </div>
                 </div>
-                <div className="overview-value">
-                  <Counter end={impactStats.totalBeneficiaries} suffix="+" />
-                </div>
-                <div className="overview-label">Total Penerima Manfaat Terbantu</div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
 
-            <ScrollReveal delay={0.2}>
-              <div className="overview-card glass-card">
-                <div className="overview-icon overview-icon-navy">
-                  <FaShieldAlt />
+              <ScrollReveal delay={0.2}>
+                <div className="side-metric-card glass-card">
+                  <div className="side-metric-icon blue">
+                    <FaShieldAlt />
+                  </div>
+                  <div className="side-metric-body">
+                    <h3 className="side-metric-val">100%</h3>
+                    <span className="side-metric-label">Integritas & Akuntabilitas</span>
+                    <p className="side-metric-sub">Setiap nota belanja dan dokumentasi serah-terima diunggah ke Google Drive/Docs</p>
+                  </div>
                 </div>
-                <div className="overview-value">100%</div>
-                <div className="overview-label">Amanah & LPJ Terbuka Publik</div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Fund Allocation Donut */}
-      <section className="allocation-section" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="allocation-section section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">01</span> Struktur Penyaluran
+              </span>
+            </div>
             <h2 className="section-title">Alokasi <span className="gradient-text-green">Penggunaan Dana</span></h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Struktur penyaluran donasi yang transparan demi maksimalnya dampak nyata setiap program</p>
+            <p className="section-subtitle">Struktur penyaluran donasi yang transparan demi maksimalnya dampak nyata setiap program sosial</p>
           </ScrollReveal>
 
           <div className="allocation-grid">
@@ -152,11 +195,14 @@ export default function Transparency() {
           <div className="yearly-header-flex">
             <div>
               <ScrollReveal>
+                <div className="section-kicker-wrap" style={{ textAlign: 'left' }}>
+                  <span className="section-kicker kicker-blue">
+                    <span className="kicker-bullet">02</span> Rekapitulasi Tahunan
+                  </span>
+                </div>
                 <h2 className="section-title" style={{ textAlign: 'left', marginBottom: 'var(--space-2)' }}>
                   Laporan Keuangan <span className="gradient-text-blue">Tahunan</span>
                 </h2>
-              </ScrollReveal>
-              <ScrollReveal delay={0.1}>
                 <p className="section-subtitle" style={{ textAlign: 'left', margin: 0 }}>
                   Detail penerimaan dan penyaluran donasi per periode, dengan dokumen LPJ terbuka publik
                 </p>
@@ -167,8 +213,10 @@ export default function Transparency() {
               {yearlyReports.map(r => (
                 <button
                   key={r.year}
+                  type="button"
                   className={`year-btn ${selectedYear === r.year ? 'year-active' : ''}`}
                   onClick={() => setSelectedYear(r.year)}
+                  aria-pressed={selectedYear === r.year}
                 >
                   {r.year}
                 </button>
@@ -276,7 +324,7 @@ export default function Transparency() {
               href={report.documentUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="doc-link-card"
+              className="doc-link-card glass-card"
               style={{ marginTop: 'var(--space-8)', textDecoration: 'none' }}
             >
               <div className="doc-icon-wrapper">
@@ -284,7 +332,7 @@ export default function Transparency() {
               </div>
               <div className="doc-link-info">
                 <span className="doc-link-title">{report.documentTitle}</span>
-                <span className="doc-link-meta">Klik untuk membuka dokumen LPJ resmi — dapat diakses publik</span>
+                <span className="doc-link-meta">Klik untuk membuka dokumen LPJ resmi — dapat diakses bebas oleh donatur</span>
               </div>
               <div className="doc-status-badge">
                 <FaCheckCircle /> {report.status}

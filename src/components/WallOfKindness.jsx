@@ -10,7 +10,6 @@ import {
 import ScrollReveal from './ScrollReveal';
 import './WallOfKindness.css';
 
-const STORAGE_KEY = 'belajar_sedekah_prayers';
 const LIKED_KEY = 'belajar_sedekah_liked_prayers';
 
 export default function WallOfKindness() {
@@ -141,35 +140,40 @@ export default function WallOfKindness() {
       <div className="container">
         <div className="wall-header-wrap">
           <ScrollReveal>
-            <span className="wall-section-badge">
-              <FaHandsHelping /> Wall of Kindness • Doa & Harapan
-            </span>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">🤲</span> Wall of Kindness • Doa & Harapan
+              </span>
+            </div>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <h2 className="section-title">
               Untaian <span className="gradient-text-green">Doa Donatur</span> & Sahabat Sedekah
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={0.2}>
+          <ScrollReveal delay={0.15}>
             <p className="section-subtitle">
-              Ruang saling menguatkan dan mengaminkan kebaikan. Kirimkan doa tulus Anda untuk para mustahik, relawan, dan sesama dermawan.
+              Ruang saling menguatkan dan mengaminkan kebaikan. Kirimkan doa tulus Anda untuk para mustahik, relawan, dan sesama dermawan di Lampung.
             </p>
           </ScrollReveal>
         </div>
 
         {/* Action button to open Form & Filter Tabs */}
         <div className="wall-controls-bar">
-          <div className="wall-filter-tabs">
-            {prayerTags.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                className={`wall-tab-btn ${activeTag === tag ? 'active' : ''}`}
-                onClick={() => setActiveTag(tag)}
-              >
-                {tag}
-              </button>
-            ))}
+          <div className="wall-filter-tabs-scroll">
+            <div className="wall-filter-tabs">
+              {prayerTags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  className={`wall-tab-btn ${activeTag === tag ? 'active' : ''}`}
+                  onClick={() => setActiveTag(tag)}
+                  aria-pressed={activeTag === tag}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
           </div>
 
           <button
@@ -240,7 +244,10 @@ export default function WallOfKindness() {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="prayer-message">Untaian Doa & Harapan *</label>
+                    <div className="label-count-flex">
+                      <label htmlFor="prayer-message">Untaian Doa & Harapan *</label>
+                      <span className="char-count">{message.length}/300 karakter</span>
+                    </div>
                     <textarea
                       id="prayer-message"
                       rows={3}
@@ -250,12 +257,11 @@ export default function WallOfKindness() {
                       required
                       maxLength={300}
                     />
-                    <span className="char-count">{message.length}/300 karakter</span>
                   </div>
 
                   <div className="form-action-row">
                     <button type="submit" className="btn btn-primary" disabled={submitting}>
-                      <FaPaperPlane /> {submitting ? 'Mengirim...' : 'Terbitkan Doa'}
+                      <FaPaperPlane /> {submitting ? 'Mengirim Doa...' : 'Terbitkan Doa'}
                     </button>
                     <button
                       type="button"
@@ -309,7 +315,7 @@ export default function WallOfKindness() {
                     onClick={() => handleLike(prayer.id)}
                     title="Aminkan Doa"
                   >
-                    <FaHeart size={12} />
+                    <FaHeart size={12} className={isLiked ? 'heart-anim' : ''} />
                     <span>Aamiin ({prayer.likes || 0})</span>
                   </button>
                 </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   FaHandHoldingHeart, FaUsers, FaMapMarkerAlt, FaCalendarAlt, FaArrowRight, 
   FaHeart, FaGift, FaGlobe, FaWhatsapp, FaShieldAlt, FaExternalLinkAlt, 
-  FaCheckCircle, FaFileAlt, FaCopy, FaCheck, FaQuoteLeft, FaClock
+  FaCheckCircle, FaFileAlt, FaCopy, FaCheck, FaQuoteLeft, FaClock, FaQrcode
 } from 'react-icons/fa';
 import ScrollReveal from '../components/ScrollReveal';
 import Counter from '../components/Counter';
@@ -65,9 +65,9 @@ export default function Home() {
             {/* Left: Headline & Community Mission */}
             <div className="hero-editorial-content">
               <ScrollReveal>
-                <div className="hero-pill-badge">
-                  <span className="pill-dot" />
-                  <span>Gerakan Sosial Pemuda Lampung • Est. 2022</span>
+                <div className="hero-editorial-badge">
+                  <span className="hero-badge-dot" />
+                  <span className="hero-badge-text">Gerakan Sosial Pemuda Lampung • Est. 2022</span>
                 </div>
               </ScrollReveal>
               
@@ -79,7 +79,7 @@ export default function Home() {
               
               <ScrollReveal delay={0.15}>
                 <p className="hero-editorial-desc">
-                  "Berapapun, dimanapun, dan kapanpun." Komunitas gerakan sosial pemuda yang diinisiasi oleh <strong>Despa Putri Lestari</strong> untuk menyalurkan sedekah Jum'at rutin, bingkisan Ramadhan, dan transparansi dana 100% terbuka ke publik.
+                  "Berapapun, dimanapun, dan kapanpun." Gerakan kepedulian sosial yang diinisiasi oleh <strong>Despa Putri Lestari</strong> untuk menyalurkan sedekah Jum'at rutin, bingkisan Ramadhan, dan transparansi dana 100% terbuka ke publik.
                 </p>
               </ScrollReveal>
 
@@ -88,7 +88,7 @@ export default function Home() {
                 <div className="hero-trust-row">
                   <div className="hero-trust-item">
                     <FaCheckCircle className="trust-icon-green" />
-                    <span>4.800+ Paket Makanan</span>
+                    <span>4.800+ Paket Nasi Jumber</span>
                   </div>
                   <div className="hero-trust-item">
                     <FaCheckCircle className="trust-icon-green" />
@@ -96,7 +96,7 @@ export default function Home() {
                   </div>
                   <div className="hero-trust-item">
                     <FaCheckCircle className="trust-icon-green" />
-                    <span>LPJ Google Docs Publik</span>
+                    <span>LPJ Google Docs Terbuka</span>
                   </div>
                 </div>
               </ScrollReveal>
@@ -107,7 +107,7 @@ export default function Home() {
                     <FaHandHoldingHeart /> Salurkan Sedekah (BSI)
                   </Link>
                   <a href="#transparansi-dana" className="btn btn-outline btn-lg">
-                    <FaShieldAlt /> Transparansi Dana (LPJ)
+                    <FaShieldAlt /> Laporan Transparansi (LPJ)
                   </a>
                   <a href="https://chat.whatsapp.com/BIxQoqQQwyt1UwaApddVT7" target="_blank" rel="noopener noreferrer" className="btn btn-outline-blue btn-lg">
                     <FaUsers /> Gabung Sobat BS
@@ -122,11 +122,11 @@ export default function Home() {
                 <div className="quick-donate-card glass-card">
                   <div className="quick-donate-header">
                     <div className="quick-donate-title-wrap">
-                      <span className="quick-badge">Kalkulator Kebaikan</span>
-                      <h3 className="quick-donate-title">Pilih Nominal & Hitung Dampak</h3>
+                      <span className="quick-badge">Kalkulator Kebaikan Cepat</span>
+                      <h3 className="quick-donate-title">Simulasi Dampak Sedekah</h3>
                     </div>
                     <span className="bsi-verified-tag">
-                      <FaCheckCircle size={11} /> Resmi BSI
+                      <FaCheckCircle size={11} /> Rekening Resmi BSI
                     </span>
                   </div>
 
@@ -143,8 +143,9 @@ export default function Home() {
                         type="button"
                         className={`preset-btn ${selectedPreset === p.amount ? 'active' : ''}`}
                         onClick={() => setSelectedPreset(p.amount)}
+                        aria-pressed={selectedPreset === p.amount}
                       >
-                        <strong>{p.label}</strong>
+                        <strong className="preset-amount">{p.label}</strong>
                         <span className="preset-tag">{p.tag}</span>
                       </button>
                     ))}
@@ -152,15 +153,18 @@ export default function Home() {
 
                   {/* Dynamic Impact Output Box */}
                   <div className="impact-preview-box">
-                    <span className="impact-box-label">Dampak Donasi Anda:</span>
+                    <div className="impact-preview-header">
+                      <span className="impact-box-label">Manfaat Nyata untuk Dhuafa:</span>
+                      <span className="impact-nominal-highlight">{formatCurrency(selectedPreset)}</span>
+                    </div>
                     <p className="impact-box-text">{getImpactDescription(selectedPreset)}</p>
                   </div>
 
-                  {/* Bank BSI Account Strip */}
+                  {/* Bank BSI Account Strip with Celebratory Tooltip */}
                   <div className="bsi-copy-strip">
                     <div className="bsi-info">
                       <span className="bsi-bank-name">Bank Syariah Indonesia (BSI)</span>
-                      <strong className="bsi-number">7234856318</strong>
+                      <strong className="bsi-number">7234 8563 18</strong>
                       <span className="bsi-holder">a.n. Despa Putri Lestari</span>
                     </div>
                     <button 
@@ -171,11 +175,13 @@ export default function Home() {
                     >
                       {copiedBSI ? (
                         <>
-                          <FaCheck /> Tersalin!
+                          <FaCheck className="copy-icon-check" />
+                          <span>Tersalin!</span>
                         </>
                       ) : (
                         <>
-                          <FaCopy /> Salin Rekening
+                          <FaCopy />
+                          <span>Salin Rekening</span>
                         </>
                       )}
                     </button>
@@ -183,7 +189,8 @@ export default function Home() {
 
                   <div className="quick-donate-footer">
                     <Link to="/donasi" className="quick-donate-cta">
-                      Buka Halaman Donasi & QRIS Lengkap <FaArrowRight size={12} />
+                      <span>Buka Halaman Donasi & QRIS Lengkap</span>
+                      <FaArrowRight size={12} />
                     </Link>
                   </div>
                 </div>
@@ -200,7 +207,7 @@ export default function Home() {
         <div className="container">
           <div className="impact-ribbon-grid">
             <ScrollReveal delay={0}>
-              <div className="ribbon-card">
+              <div className="ribbon-card glass-card">
                 <div className="ribbon-icon green">
                   <FaHeart />
                 </div>
@@ -212,7 +219,7 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.08}>
-              <div className="ribbon-card">
+              <div className="ribbon-card glass-card">
                 <div className="ribbon-icon blue">
                   <FaGift />
                 </div>
@@ -224,7 +231,7 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.16}>
-              <div className="ribbon-card">
+              <div className="ribbon-card glass-card">
                 <div className="ribbon-icon navy">
                   <FaMapMarkerAlt />
                 </div>
@@ -236,7 +243,7 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.24}>
-              <div className="ribbon-card">
+              <div className="ribbon-card glass-card">
                 <div className="ribbon-icon teal">
                   <FaShieldAlt />
                 </div>
@@ -256,14 +263,16 @@ export default function Home() {
       <section className="programs-section section" id="program-kebaikan">
         <div className="container">
           <ScrollReveal>
-            <div className="section-tag-wrap">
-              <span className="section-tag">Program Kebaikan Nyata</span>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">01</span> Aksi Nyata di Lapangan
+              </span>
             </div>
             <h2 className="section-title">
-              Aksi Sosial Bersama <span className="gradient-text-green">Belajar Sedekah</span>
+              Pilar Program <span className="gradient-text-green">Belajar Sedekah</span>
             </h2>
             <p className="section-subtitle">
-              Penyaluran sedekah yang tepat sasaran, terjun langsung ke lapangan menyusuri lorong-lorong dan jalanan di Lampung
+              Penyaluran sedekah yang tepat sasaran, terjun langsung menyusuri lorong-lorong dan sudut jalanan di Lampung
             </p>
           </ScrollReveal>
 
@@ -426,8 +435,10 @@ export default function Home() {
       <section className="home-transparency-section section" id="transparansi-dana">
         <div className="container">
           <ScrollReveal>
-            <div className="section-tag-wrap">
-              <span className="section-tag tag-blue">Akuntabilitas & Integritas</span>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker kicker-blue">
+                <span className="kicker-bullet">02</span> Akuntabilitas & Integritas
+              </span>
             </div>
             <h2 className="section-title">
               Transparansi <span className="gradient-text-blue">Pengelolaan Dana</span>
@@ -451,7 +462,7 @@ export default function Home() {
               <div className="metric-box glass-card">
                 <span className="metric-box-label">Penerima Manfaat Terbantu</span>
                 <h3 className="metric-box-val"><Counter end={impactStats.totalBeneficiaries} suffix="+" /> Jiwa</h3>
-                <span className="metric-box-sub">Pekerja jalanan, lansia & yatim</span>
+                <span className="metric-box-sub">Pekerja jalanan, lansia & dhuafa</span>
               </div>
             </ScrollReveal>
 
@@ -470,7 +481,7 @@ export default function Home() {
             <ScrollReveal direction="right">
               <div className="allocation-clean-card glass-card">
                 <div className="bento-card-header">
-                  <span className="bento-badge">Alokasi Dana Donasi</span>
+                  <span className="bento-badge">Alokasi Penyaluran Donasi</span>
                   <h3 className="bento-title">Penyaluran Tepat Sasaran</h3>
                 </div>
 
@@ -571,7 +582,11 @@ export default function Home() {
           <div className="about-preview-grid">
             <ScrollReveal direction="right">
               <div className="about-preview-content">
-                <span className="section-tag">Tentang Belajar Sedekah</span>
+                <div className="section-kicker-wrap" style={{ textAlign: 'left' }}>
+                  <span className="section-kicker">
+                    <span className="kicker-bullet">04</span> Mengenal Komunitas
+                  </span>
+                </div>
                 <h2 className="about-preview-title">
                   Menyemai Kebaikan, <span className="gradient-text-green">Bertumbuh</span> Bersama
                 </h2>
@@ -597,15 +612,15 @@ export default function Home() {
             
             <ScrollReveal direction="left">
               <div className="about-preview-visual">
-                <div className="visual-card visual-card-1">
+                <div className="visual-card visual-card-1 glass-card">
                   <FaHeart size={32} />
                   <span>Jum'at Berkah</span>
                 </div>
-                <div className="visual-card visual-card-2">
+                <div className="visual-card visual-card-2 glass-card">
                   <FaGift size={32} />
                   <span>Bingkisan Ramadhan</span>
                 </div>
-                <div className="visual-card visual-card-3">
+                <div className="visual-card visual-card-3 glass-card">
                   <FaUsers size={32} />
                   <span>Sobat BS Lampung</span>
                 </div>
@@ -622,8 +637,10 @@ export default function Home() {
       <section className="news-section section">
         <div className="container">
           <ScrollReveal>
-            <div className="section-tag-wrap">
-              <span className="section-tag">Kabar & Publikasi</span>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker kicker-blue">
+                <span className="kicker-bullet">05</span> Kabar & Dokumentasi
+              </span>
             </div>
             <h2 className="section-title">
               Dokumentasi & <span className="gradient-text-blue">Rilis Kegiatan</span>

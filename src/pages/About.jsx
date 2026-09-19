@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaInstagram, FaTiktok, FaHeart, FaMapMarkerAlt, FaUsers } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok, FaHeart, FaMapMarkerAlt, FaUsers, FaShieldAlt } from 'react-icons/fa';
 import { HiLightBulb, HiEye, HiSparkles } from 'react-icons/hi';
 import ScrollReveal from '../components/ScrollReveal';
 import { teamMembers, milestones, values } from '../data/team';
@@ -19,65 +19,95 @@ export default function About() {
         <div className="page-hero-bg" />
         <div className="container page-hero-content">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">🪴</span> Gerakan Pemuda Lampung
+              </span>
+            </div>
             <h1 className="page-hero-title">
               Tentang <span className="gradient-text-green">Komunitas</span> Belajar <span className="gradient-text-blue">Sedekah</span>
             </h1>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="page-hero-subtitle">
-              Mengenal lebih dekat visi kemanusiaan, ketulusan relawan, dan rekam jejak dedikasi
-              kami yang diinisiasi oleh <strong>Despa Putri Lestari</strong> di Lampung sejak tahun 2022.
+              Mengenal lebih dekat visi kemanusiaan, ketulusan relawan, dan rekam jejak dedikasi sosial yang diinisiasi oleh <strong>Despa Putri Lestari</strong> di Lampung sejak tahun 2022.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* Vision Mission */}
+      {/* Asymmetrical Story & Pillars Bento (Anti-AI-Slop) */}
       <section className="vision-section section">
         <div className="container">
-          <div className="vision-grid">
-            <ScrollReveal>
-              <div className="vision-card glass-card">
-                <div className="vision-icon-wrapper icon-green">
-                  <HiEye size={32} />
+          <div className="story-pillars-bento">
+            {/* Left Col: Founder & Philosophy Spotlight Card */}
+            <ScrollReveal direction="right" className="bento-story-col">
+              <div className="story-spotlight-card glass-card">
+                <div className="story-badge-row">
+                  <span className="story-pill">FILOSOFI & INSPIRASI GERAKAN</span>
+                  <span className="founder-tag">Inisiator: Despa Putri Lestari</span>
                 </div>
-                <h3>Visi Utama</h3>
-                <p>
-                  Menjadi ruang belajar dan bertumbuh bersama dalam membumikan sedekah, merangkul generasi muda untuk peduli, serta menghadirkan kebahagiaan nyata bagi dhuafa di Lampung dan sekitarnya.
-                </p>
+
+                <div className="story-body">
+                  <h3 className="story-tagline">
+                    "Temanmu belajar, berbagi dan bertumbuh setiap hari 🪴"
+                  </h3>
+                  <p className="story-paragraph">
+                    Komunitas Belajar Sedekah lahir dari kesederhanaan niat di sudut kota Bandar Lampung pada tahun 2022. Kami meyakini bahwa sedekah bukanlah tentang menunggu diri berkelebihan, melainkan tentang <strong>kebiasaan membahagiakan orang lain</strong> tanpa memandang nominal.
+                  </p>
+                  <p className="story-paragraph">
+                    Setiap rupiah yang dititipkan oleh para donatur dikelola dengan prinsip <strong>100% amanah, tanpa potongan tersembunyi</strong>, dan dilaporkan secara terbuka melalui Laporan Pertanggungjawaban (LPJ) berkala di Google Docs.
+                  </p>
+                </div>
+
+                <div className="story-footer-chips">
+                  <span className="story-chip">📍 Berbasis di Lampung</span>
+                  <span className="story-chip">💌 Rutin Jum'at Berkah</span>
+                  <span className="story-chip">💎 100% Transparan</span>
+                </div>
               </div>
             </ScrollReveal>
-            
-            <ScrollReveal delay={0.1}>
-              <div className="vision-card glass-card">
-                <div className="vision-icon-wrapper icon-blue">
-                  <HiLightBulb size={32} />
+
+            {/* Right Col: Visi & Misi Stacked Cards */}
+            <div className="bento-pillars-stack">
+              <ScrollReveal delay={0.1}>
+                <div className="pillar-card glass-card">
+                  <div className="pillar-header">
+                    <div className="pillar-icon-box icon-green">
+                      <HiEye size={24} />
+                    </div>
+                    <div>
+                      <h4 className="pillar-title">Visi Utama Komunitas</h4>
+                      <span className="pillar-sub">Arah Gerak Kebaikan</span>
+                    </div>
+                  </div>
+                  <p className="pillar-desc">
+                    Menjadi ruang belajar dan bertumbuh bersama dalam membumikan sedekah, merangkul generasi muda untuk peduli, serta menghadirkan kebahagiaan nyata bagi dhuafa di Lampung dan sekitarnya.
+                  </p>
                 </div>
-                <h3>Misi Mulia</h3>
-                <ul>
-                  <li>Membiasakan sedekah tanpa batas: berapapun, dimanapun, dan kapanpun.</li>
-                  <li>Melaksanakan aksi rutin mingguan Jum'at Berkah (Jumber 💌) bagi pejuang nafkah jalanan.</li>
-                  <li>Menyalurkan Paket Bingkisan Ramadhan & Lebaran bagi keluarga prasejahtera dan yatim.</li>
-                  <li>Membina komunitas pemuda Sobat BS untuk belajar, berbagi, dan bertumbuh bersama.</li>
-                  <li>Menerapkan tata kelola donasi 100% amanah dengan LPJ transparan dan terbuka.</li>
-                </ul>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.2}>
-              <div className="vision-card glass-card">
-                <div className="vision-icon-wrapper icon-navy">
-                  <HiSparkles size={32} />
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.2}>
+                <div className="pillar-card glass-card">
+                  <div className="pillar-header">
+                    <div className="pillar-icon-box icon-blue">
+                      <HiLightBulb size={24} />
+                    </div>
+                    <div>
+                      <h4 className="pillar-title">Misi Mulia Kami</h4>
+                      <span className="pillar-sub">5 Langkah Konkret</span>
+                    </div>
+                  </div>
+                  <ul className="pillar-misi-list">
+                    <li>Membiasakan sedekah tanpa batas: berapapun, dimanapun, dan kapanpun.</li>
+                    <li>Melaksanakan aksi rutin Jum'at Berkah (Jumber 💌) bagi pekerja jalanan di Lampung.</li>
+                    <li>Menyalurkan Paket Bingkisan Ramadhan & Lebaran bagi lansia dhuafa & yatim.</li>
+                    <li>Membina wadah relawan pemuda Sobat BS untuk bertumbuh bersama.</li>
+                    <li>Menjaga tata kelola donasi 100% amanah dengan LPJ terbuka di Google Docs.</li>
+                  </ul>
                 </div>
-                <h3>Filosofi & Tagline</h3>
-                <p className="tagline-text">
-                  "Temanmu belajar, berbagi dan bertumbuh setiap hari 🪴"
-                </p>
-                <p>
-                  Setiap langkah kecil kebaikan yang ditanam bersama-sama dengan niat ikhlas akan tumbuh menjadi pohon kebaikan yang menaungi dan memberi manfaat luas bagi sesama.
-                </p>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
@@ -86,10 +116,13 @@ export default function About() {
       <section className="values-section section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">01</span> Nilai & Prinsip
+              </span>
+            </div>
             <h2 className="section-title">Nilai-Nilai <span className="gradient-text-green">Integritas</span></h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Empat pilar nilai yang menuntun langkah relawan Sobat BS dalam setiap aksi sosial</p>
+            <p className="section-subtitle">Empat pilar nilai yang menuntun langkah relawan Sobat BS dalam setiap aksi sosial di lapangan</p>
           </ScrollReveal>
 
           <div className="values-grid">
@@ -110,9 +143,12 @@ export default function About() {
       <section className="timeline-section section">
         <div className="container">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker kicker-blue">
+                <span className="kicker-bullet">02</span> Rekam Jejak
+              </span>
+            </div>
             <h2 className="section-title">Jejak Langkah <span className="gradient-text-blue">Pengabdian</span></h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
             <p className="section-subtitle">Perjalanan sejak tahun 2022 merajut asa bersama donatur, relawan, dan para penerima manfaat di Lampung</p>
           </ScrollReveal>
 
@@ -139,10 +175,13 @@ export default function About() {
       <section className="team-section section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <ScrollReveal>
-            <h2 className="section-title">Struktur <span className="gradient-text-green">Penggerak</span> Komunitas</h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <p className="section-subtitle">Sinergi relawan dan tim yang mendedikasikan waktu dan tenaga demi kelancaran seluruh aksi sosial</p>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker">
+                <span className="kicker-bullet">03</span> Penggerak Komunitas
+              </span>
+            </div>
+            <h2 className="section-title">Struktur <span className="gradient-text-green">Relawan & Tim</span></h2>
+            <p className="section-subtitle">Sinergi relawan dan pengurus yang mendedikasikan waktu dan tenaga demi kelancaran seluruh aksi sosial</p>
           </ScrollReveal>
 
           <div className="team-grid">
@@ -166,9 +205,12 @@ export default function About() {
       <section className="contact-section section">
         <div className="container">
           <ScrollReveal>
+            <div className="section-kicker-wrap">
+              <span className="section-kicker kicker-blue">
+                <span className="kicker-bullet">04</span> Narahubung Resmi
+              </span>
+            </div>
             <h2 className="section-title">Kanal <span className="gradient-text-blue">Komunikasi Resmi</span></h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
             <p className="section-subtitle">Hubungi narahubung resmi kami untuk konfirmasi donasi, info relawan, atau ajakan kolaborasi</p>
           </ScrollReveal>
 
@@ -180,7 +222,7 @@ export default function About() {
                 <p>0822-6966-5134 (Narahubung)</p>
               </a>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={0.1}>
               <a href="https://www.instagram.com/belajarsedekah.id/" target="_blank" rel="noopener noreferrer" className="contact-card glass-card">
                 <FaInstagram className="contact-card-icon icon-color-blue" />
@@ -188,19 +230,11 @@ export default function About() {
                 <p>@belajarsedekah.id</p>
               </a>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={0.2}>
-              <a href="https://chat.whatsapp.com/BIxQoqQQwyt1UwaApddVT7" target="_blank" rel="noopener noreferrer" className="contact-card glass-card">
-                <FaUsers className="contact-card-icon icon-color-navy" />
-                <h4>Grup WhatsApp</h4>
-                <p>Keluarga Sobat BS</p>
-              </a>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.3}>
               <a href="https://vt.tiktok.com/ZS2JAStEo/" target="_blank" rel="noopener noreferrer" className="contact-card glass-card">
-                <FaTiktok className="contact-card-icon icon-color-blue" />
-                <h4>TikTok</h4>
+                <FaTiktok className="contact-card-icon icon-color-navy" />
+                <h4>TikTok Komunitas</h4>
                 <p>@belajarsedekah.id</p>
               </a>
             </ScrollReveal>
